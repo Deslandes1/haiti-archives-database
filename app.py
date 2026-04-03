@@ -3,9 +3,6 @@ import sqlite3
 import os
 import datetime
 import hashlib
-from PIL import Image
-import io
-import base64
 
 # ----------------------------------------------------------------------
 # Page config
@@ -355,8 +352,8 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    # Official Haitian flag with coat of arms
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Flag_of_Haiti.svg/320px-Flag_of_Haiti.svg.png", width=200)
+    # Official Haitian flag with coat of arms (reliable URL)
+    st.image("https://www.countryflags.com/wp-content/uploads/haiti-flag-png-large.png", width=200)
     st.title(t["title"])
     st.markdown("### 🇭🇹 " + t["login"])
     pwd = st.text_input(t["password"], type="password")
@@ -369,7 +366,7 @@ if not st.session_state.authenticated:
     st.stop()
 
 # Main app after login
-st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Flag_of_Haiti.svg/320px-Flag_of_Haiti.svg.png", width=150)
+st.sidebar.image("https://www.countryflags.com/wp-content/uploads/haiti-flag-png-large.png", width=150)
 st.sidebar.title(t["title"])
 st.sidebar.write(f"**{t['developer']}**")
 st.sidebar.write(f"🏢 {t['company']}")
@@ -442,7 +439,7 @@ with tab1:
         st.info(f"No citizens found for year {selected_year}. Use 'Add Citizen' tab.")
 
 # ----------------------------------------------------------------------
-# Add / Edit Citizen (with unique keys to avoid duplicate ID error)
+# Add / Edit Citizen (with unique keys)
 # ----------------------------------------------------------------------
 with tab2:
     edit_mode = "edit_id" in st.session_state
