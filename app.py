@@ -295,7 +295,6 @@ def init_db():
         minister_signature_date TEXT,
         minister_name TEXT
     )''')
-    # Table for storing file paths (for each citizen)
     c.execute('''CREATE TABLE IF NOT EXISTS citizen_files (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         citizen_id INTEGER,
@@ -304,7 +303,6 @@ def init_db():
         upload_date TEXT,
         FOREIGN KEY (citizen_id) REFERENCES citizens (id)
     )''')
-    # Table for annual password (only one row)
     c.execute('''CREATE TABLE IF NOT EXISTS app_config (
         key TEXT PRIMARY KEY,
         value TEXT
@@ -319,10 +317,8 @@ def hash_password(pwd):
     return hashlib.sha256(pwd.encode()).hexdigest()
 
 def verify_password(pwd):
-    # Default initial password: 18032026
     stored_hash = get_config("password_hash")
     if not stored_hash:
-        # Set default
         set_config("password_hash", hash_password("18032026"))
         stored_hash = hash_password("18032026")
     return stored_hash == hash_password(pwd)
@@ -359,6 +355,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
+    # Official Haitian flag with coat of arms
     st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Flag_of_Haiti.svg/320px-Flag_of_Haiti.svg.png", width=200)
     st.title(t["title"])
     st.markdown("### 🇭🇹 " + t["login"])
@@ -382,11 +379,11 @@ if st.sidebar.button(t["logout"]):
     st.session_state.authenticated = False
     st.rerun()
 
-# Year selection (for archival year)
+# Year selection
 years = list(range(2020, get_current_year()+2))
 selected_year = st.sidebar.selectbox(t["select_year"], years, index=years.index(get_current_year()))
 st.sidebar.markdown("---")
-# Admin: change password for next year
+# Admin: change password
 with st.sidebar.expander(t["change_password"]):
     old = st.text_input(t["current_password"], type="password")
     new1 = st.text_input(t["new_password"], type="password")
@@ -405,7 +402,6 @@ with st.sidebar.expander(t["change_password"]):
 st.markdown(f"<h1 style='text-align: center; color: #00209F;'>{t['title']}</h1>", unsafe_allow_html=True)
 st.markdown(f"<h3 style='text-align: center;'>🇭🇹 {t['year']}: {selected_year} 🇭🇹</h3>", unsafe_allow_html=True)
 
-# Tab layout
 tab1, tab2, tab3 = st.tabs([t["dashboard"], t["add_citizen"], t["search"]])
 
 # ----------------------------------------------------------------------
@@ -446,7 +442,7 @@ with tab1:
         st.info(f"No citizens found for year {selected_year}. Use 'Add Citizen' tab.")
 
 # ----------------------------------------------------------------------
-# Add / Edit Citizen
+# Add / Edit Citizen (with unique keys to avoid duplicate ID error)
 # ----------------------------------------------------------------------
 with tab2:
     edit_mode = "edit_id" in st.session_state
@@ -460,58 +456,58 @@ with tab2:
             del st.session_state.edit_id
             st.rerun()
         st.subheader(t["edit_citizen"])
+        key_suffix = "_edit"
     else:
         st.subheader(t["add_citizen"])
+        key_suffix = ""
 
-    with st.form("citizen_form"):
+    with st.form(key=f"citizen_form{key_suffix}"):
         if edit_mode:
             cit_id = cit_data[0]
-            matricule = st.text_input(t["matricule"], value=cit_data[2])
-            full_name = st.text_input(t["full_name"], value=cit_data[3])
-            birth_date = st.date_input(t["birth_date"], value=datetime.date.fromisoformat(cit_data[4]) if cit_data[4] else None)
-            birth_place = st.text_input(t["birth_place"], value=cit_data[5] or "")
-            gender = st.radio(t["gender"], [t["male"], t["female"]], index=0 if cit_data[6] == t["male"] else 1)
-            cin_number = st.text_input(t["cin_number"], value=cit_data[7] or "")
-            cin_delivery = st.date_input(t["cin_delivery"], value=datetime.date.fromisoformat(cit_data[8]) if cit_data[8] else None)
-            cin_expiry = st.date_input(t["cin_expiry"], value=datetime.date.fromisoformat(cit_data[9]) if cit_data[9] else None)
-            passport_number = st.text_input(t["passport_number"], value=cit_data[10] or "")
-            passport_delivery = st.date_input(t["passport_delivery"], value=datetime.date.fromisoformat(cit_data[11]) if cit_data[11] else None)
-            passport_expiry = st.date_input(t["passport_expiry"], value=datetime.date.fromisoformat(cit_data[12]) if cit_data[12] else None)
-            license_number = st.text_input(t["license_number"], value=cit_data[13] or "")
-            license_delivery = st.date_input(t["license_delivery"], value=datetime.date.fromisoformat(cit_data[14]) if cit_data[14] else None)
-            license_expiry = st.date_input(t["license_expiry"], value=datetime.date.fromisoformat(cit_data[15]) if cit_data[15] else None)
-            voting_years = st.text_input(t["voting_years"], value=cit_data[16] or "")
-            family_sponsorship = st.text_input(t["family_sponsorship"], value=cit_data[17] or "")
-            school_sponsorship = st.text_input(t["school_sponsorship"], value=cit_data[18] or "")
-            other_sponsorship = st.text_input(t["other_sponsorship"], value=cit_data[19] or "")
-            minister_signed = cit_data[20]  # boolean
+            matricule = st.text_input(t["matricule"], value=cit_data[2], key=f"matricule{key_suffix}")
+            full_name = st.text_input(t["full_name"], value=cit_data[3], key=f"full_name{key_suffix}")
+            birth_date = st.date_input(t["birth_date"], value=datetime.date.fromisoformat(cit_data[4]) if cit_data[4] else None, key=f"birth_date{key_suffix}")
+            birth_place = st.text_input(t["birth_place"], value=cit_data[5] or "", key=f"birth_place{key_suffix}")
+            gender = st.radio(t["gender"], [t["male"], t["female"]], index=0 if cit_data[6] == t["male"] else 1, key=f"gender{key_suffix}")
+            cin_number = st.text_input(t["cin_number"], value=cit_data[7] or "", key=f"cin_number{key_suffix}")
+            cin_delivery = st.date_input(t["cin_delivery"], value=datetime.date.fromisoformat(cit_data[8]) if cit_data[8] else None, key=f"cin_delivery{key_suffix}")
+            cin_expiry = st.date_input(t["cin_expiry"], value=datetime.date.fromisoformat(cit_data[9]) if cit_data[9] else None, key=f"cin_expiry{key_suffix}")
+            passport_number = st.text_input(t["passport_number"], value=cit_data[10] or "", key=f"passport_number{key_suffix}")
+            passport_delivery = st.date_input(t["passport_delivery"], value=datetime.date.fromisoformat(cit_data[11]) if cit_data[11] else None, key=f"passport_delivery{key_suffix}")
+            passport_expiry = st.date_input(t["passport_expiry"], value=datetime.date.fromisoformat(cit_data[12]) if cit_data[12] else None, key=f"passport_expiry{key_suffix}")
+            license_number = st.text_input(t["license_number"], value=cit_data[13] or "", key=f"license_number{key_suffix}")
+            license_delivery = st.date_input(t["license_delivery"], value=datetime.date.fromisoformat(cit_data[14]) if cit_data[14] else None, key=f"license_delivery{key_suffix}")
+            license_expiry = st.date_input(t["license_expiry"], value=datetime.date.fromisoformat(cit_data[15]) if cit_data[15] else None, key=f"license_expiry{key_suffix}")
+            voting_years = st.text_input(t["voting_years"], value=cit_data[16] or "", key=f"voting_years{key_suffix}")
+            family_sponsorship = st.text_input(t["family_sponsorship"], value=cit_data[17] or "", key=f"family_sponsorship{key_suffix}")
+            school_sponsorship = st.text_input(t["school_sponsorship"], value=cit_data[18] or "", key=f"school_sponsorship{key_suffix}")
+            other_sponsorship = st.text_input(t["other_sponsorship"], value=cit_data[19] or "", key=f"other_sponsorship{key_suffix}")
+            minister_signed = cit_data[20]
         else:
-            matricule = st.text_input(t["matricule"])
-            full_name = st.text_input(t["full_name"])
-            birth_date = st.date_input(t["birth_date"])
-            birth_place = st.text_input(t["birth_place"])
-            gender = st.radio(t["gender"], [t["male"], t["female"]])
-            cin_number = st.text_input(t["cin_number"])
-            cin_delivery = st.date_input(t["cin_delivery"])
-            cin_expiry = st.date_input(t["cin_expiry"])
-            passport_number = st.text_input(t["passport_number"])
-            passport_delivery = st.date_input(t["passport_delivery"])
-            passport_expiry = st.date_input(t["passport_expiry"])
-            license_number = st.text_input(t["license_number"])
-            license_delivery = st.date_input(t["license_delivery"])
-            license_expiry = st.date_input(t["license_expiry"])
-            voting_years = st.text_input(t["voting_years"])
-            family_sponsorship = st.text_input(t["family_sponsorship"])
-            school_sponsorship = st.text_input(t["school_sponsorship"])
-            other_sponsorship = st.text_input(t["other_sponsorship"])
+            matricule = st.text_input(t["matricule"], key=f"matricule{key_suffix}")
+            full_name = st.text_input(t["full_name"], key=f"full_name{key_suffix}")
+            birth_date = st.date_input(t["birth_date"], key=f"birth_date{key_suffix}")
+            birth_place = st.text_input(t["birth_place"], key=f"birth_place{key_suffix}")
+            gender = st.radio(t["gender"], [t["male"], t["female"]], key=f"gender{key_suffix}")
+            cin_number = st.text_input(t["cin_number"], key=f"cin_number{key_suffix}")
+            cin_delivery = st.date_input(t["cin_delivery"], key=f"cin_delivery{key_suffix}")
+            cin_expiry = st.date_input(t["cin_expiry"], key=f"cin_expiry{key_suffix}")
+            passport_number = st.text_input(t["passport_number"], key=f"passport_number{key_suffix}")
+            passport_delivery = st.date_input(t["passport_delivery"], key=f"passport_delivery{key_suffix}")
+            passport_expiry = st.date_input(t["passport_expiry"], key=f"passport_expiry{key_suffix}")
+            license_number = st.text_input(t["license_number"], key=f"license_number{key_suffix}")
+            license_delivery = st.date_input(t["license_delivery"], key=f"license_delivery{key_suffix}")
+            license_expiry = st.date_input(t["license_expiry"], key=f"license_expiry{key_suffix}")
+            voting_years = st.text_input(t["voting_years"], key=f"voting_years{key_suffix}")
+            family_sponsorship = st.text_input(t["family_sponsorship"], key=f"family_sponsorship{key_suffix}")
+            school_sponsorship = st.text_input(t["school_sponsorship"], key=f"school_sponsorship{key_suffix}")
+            other_sponsorship = st.text_input(t["other_sponsorship"], key=f"other_sponsorship{key_suffix}")
             minister_signed = False
 
-        # File uploads
-        uploaded_files = st.file_uploader(t["documents"], accept_multiple_files=True, type=["pdf","jpg","jpeg","png"])
+        uploaded_files = st.file_uploader(t["documents"], accept_multiple_files=True, type=["pdf","jpg","jpeg","png"], key=f"files{key_suffix}")
 
-        # Minister signature section (only if not signed)
         if not minister_signed:
-            minister_name = st.text_input(t["minister_signature"] + " (Name of Minister)")
+            minister_name = st.text_input(t["minister_signature"] + " (Name of Minister)", key=f"minister{key_suffix}")
             sign_button = st.form_submit_button(t["sign"])
         else:
             st.info(t["signed_by"] + " " + cit_data[21] if edit_mode else "")
@@ -520,7 +516,6 @@ with tab2:
         submitted = st.form_submit_button(t["save"] if not edit_mode else t["update"])
 
         if submitted:
-            # Save citizen data
             conn = sqlite3.connect(DB_NAME)
             c = conn.cursor()
             if edit_mode:
@@ -565,7 +560,6 @@ with tab2:
             st.success("File validated by Minister.")
             st.rerun()
 
-        # Save uploaded files
         if uploaded_files:
             os.makedirs("uploads", exist_ok=True)
             for file in uploaded_files:
@@ -598,7 +592,6 @@ with tab3:
         if results:
             for r in results:
                 st.write(f"**{r[2]}** - {r[3]} - Signed: {'Yes' if r[20] else 'No'}")
-                # Show associated files
                 c2 = conn.cursor()
                 c2.execute("SELECT file_name, upload_date FROM citizen_files WHERE citizen_id=?", (r[0],))
                 files = c2.fetchall()
