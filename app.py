@@ -73,8 +73,10 @@ lang_dict = {
         "citizen_saved": "Citizen record saved.",
         "citizen_updated": "Citizen record updated.",
         "citizen_deleted": "Citizen record deleted.",
-        "show_sensitive": "👁️ Show sensitive data (CIN, NIF, Passport)",
-        "hide_sensitive": "🔒 Hide sensitive data"
+        "show_sensitive": "👁️ Show sensitive data in lists (CIN, NIF, Passport)",
+        "hide_sensitive": "🔒 Hide sensitive data in lists",
+        "show_form_sensitive": "👁️ Show sensitive fields in form (reveal values)",
+        "hide_form_sensitive": "🔒 Hide sensitive fields in form (show as dots)"
     },
     "fr": {
         "title": "Base de données des Archives Nationales d'Haïti",
@@ -136,8 +138,10 @@ lang_dict = {
         "citizen_saved": "Dossier citoyen enregistré.",
         "citizen_updated": "Dossier citoyen mis à jour.",
         "citizen_deleted": "Dossier citoyen supprimé.",
-        "show_sensitive": "👁️ Afficher les données sensibles (CIN, NIF, Passeport)",
-        "hide_sensitive": "🔒 Masquer les données sensibles"
+        "show_sensitive": "👁️ Afficher les données sensibles dans les listes (CIN, NIF, Passeport)",
+        "hide_sensitive": "🔒 Masquer les données sensibles dans les listes",
+        "show_form_sensitive": "👁️ Afficher les champs sensibles dans le formulaire (révéler les valeurs)",
+        "hide_form_sensitive": "🔒 Masquer les champs sensibles dans le formulaire (afficher des points)"
     },
     "es": {
         "title": "Base de Datos de los Archivos Nacionales de Haití",
@@ -199,8 +203,10 @@ lang_dict = {
         "citizen_saved": "Registro de ciudadano guardado.",
         "citizen_updated": "Registro de ciudadano actualizado.",
         "citizen_deleted": "Registro de ciudadano eliminado.",
-        "show_sensitive": "👁️ Mostrar datos sensibles (CIN, NIF, Pasaporte)",
-        "hide_sensitive": "🔒 Ocultar datos sensibles"
+        "show_sensitive": "👁️ Mostrar datos sensibles en listas (CIN, NIF, Pasaporte)",
+        "hide_sensitive": "🔒 Ocultar datos sensibles en listas",
+        "show_form_sensitive": "👁️ Mostrar campos sensibles en el formulario (revelar valores)",
+        "hide_form_sensitive": "🔒 Ocultar campos sensibles en el formulario (mostrar puntos)"
     },
     "ht": {
         "title": "Baz Done Achiv Nasyonal Ayiti",
@@ -262,8 +268,10 @@ lang_dict = {
         "citizen_saved": "Dosye sitwayen anrejistre.",
         "citizen_updated": "Dosye sitwayen mete ajou.",
         "citizen_deleted": "Dosye sitwayen efase.",
-        "show_sensitive": "👁️ Montre enfòmasyon sansib (CIN, NIF, Paspò)",
-        "hide_sensitive": "🔒 Kache enfòmasyon sansib"
+        "show_sensitive": "👁️ Montre enfòmasyon sansib nan lis yo (CIN, NIF, Paspò)",
+        "hide_sensitive": "🔒 Kache enfòmasyon sansib nan lis yo",
+        "show_form_sensitive": "👁️ Montre jaden sansib nan fòmilè a (wè valè yo)",
+        "hide_form_sensitive": "🔒 Kache jaden sansib nan fòmilè a (montre pwen)"
     }
 }
 
@@ -388,16 +396,28 @@ st.sidebar.write(f"🏢 {t['company']}")
 st.sidebar.write(f"📧 {t['email']}")
 st.sidebar.write(f"📞 {t['phone']}")
 
-# Sensitive data toggle
+# Two toggles: one for dashboard/search, one for form
 if "show_sensitive" not in st.session_state:
     st.session_state.show_sensitive = False
+if "show_form_sensitive" not in st.session_state:
+    st.session_state.show_form_sensitive = False
+
 show_sensitive = st.sidebar.checkbox(
-    t["show_sensitive"], 
+    t["show_sensitive"] if not st.session_state.show_sensitive else t["hide_sensitive"],
     value=st.session_state.show_sensitive,
-    help="When checked, CIN, NIF and Passport numbers become visible"
+    help="Show CIN, NIF, Passport numbers in lists"
 )
 if show_sensitive != st.session_state.show_sensitive:
     st.session_state.show_sensitive = show_sensitive
+    st.rerun()
+
+show_form_sensitive = st.sidebar.checkbox(
+    t["show_form_sensitive"] if not st.session_state.show_form_sensitive else t["hide_form_sensitive"],
+    value=st.session_state.show_form_sensitive,
+    help="When off, sensitive fields in the form appear as dots (password style)"
+)
+if show_form_sensitive != st.session_state.show_form_sensitive:
+    st.session_state.show_form_sensitive = show_form_sensitive
     st.rerun()
 
 if st.sidebar.button(t["logout"]):
@@ -440,7 +460,6 @@ with tab1:
     conn.close()
     if citizens:
         for cit in citizens:
-            # Mask sensitive fields if needed
             matricule_display = mask_value(cit[1], st.session_state.show_sensitive)
             cin_display = mask_value(cit[4], st.session_state.show_sensitive)
             passport_display = mask_value(cit[5], st.session_state.show_sensitive)
@@ -470,7 +489,7 @@ with tab1:
         st.info(f"No citizens found for year {selected_year}. Use 'Add Citizen' tab.")
 
 # ----------------------------------------------------------------------
-# Add / Edit Citizen (edit form always shows actual numbers)
+# Add / Edit Citizen (with sensitive fields as password inputs when toggle is off)
 # ----------------------------------------------------------------------
 with tab2:
     edit_mode = "edit_id" in st.session_state
@@ -492,44 +511,44 @@ with tab2:
     with st.form(key=f"citizen_form{key_suffix}"):
         if edit_mode:
             cit_id = cit_data[0]
-            matricule = st.text_input(t["matricule"], value=cit_data[2], key=f"matricule{key_suffix}")
+            matricule = st.text_input(t["matricule"], value=cit_data[2], type="password" if not st.session_state.show_form_sensitive else "default", key=f"matricule{key_suffix}")
             full_name = st.text_input(t["full_name"], value=cit_data[3], key=f"full_name{key_suffix}")
             birth_date = st.date_input(t["birth_date"], value=datetime.date.fromisoformat(cit_data[4]) if cit_data[4] else None, key=f"birth_date{key_suffix}")
             birth_place = st.text_input(t["birth_place"], value=cit_data[5] or "", key=f"birth_place{key_suffix}")
             gender = st.radio(t["gender"], [t["male"], t["female"]], index=0 if cit_data[6] == t["male"] else 1, key=f"gender{key_suffix}")
-            cin_number = st.text_input(t["cin_number"], value=cit_data[7] or "", key=f"cin_number{key_suffix}")
+            cin_number = st.text_input(t["cin_number"], value=cit_data[7] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"cin_number{key_suffix}")
             cin_delivery = st.date_input(t["cin_delivery"], value=datetime.date.fromisoformat(cit_data[8]) if cit_data[8] else None, key=f"cin_delivery{key_suffix}")
             cin_expiry = st.date_input(t["cin_expiry"], value=datetime.date.fromisoformat(cit_data[9]) if cit_data[9] else None, key=f"cin_expiry{key_suffix}")
-            passport_number = st.text_input(t["passport_number"], value=cit_data[10] or "", key=f"passport_number{key_suffix}")
+            passport_number = st.text_input(t["passport_number"], value=cit_data[10] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"passport_number{key_suffix}")
             passport_delivery = st.date_input(t["passport_delivery"], value=datetime.date.fromisoformat(cit_data[11]) if cit_data[11] else None, key=f"passport_delivery{key_suffix}")
             passport_expiry = st.date_input(t["passport_expiry"], value=datetime.date.fromisoformat(cit_data[12]) if cit_data[12] else None, key=f"passport_expiry{key_suffix}")
-            license_number = st.text_input(t["license_number"], value=cit_data[13] or "", key=f"license_number{key_suffix}")
+            license_number = st.text_input(t["license_number"], value=cit_data[13] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"license_number{key_suffix}")
             license_delivery = st.date_input(t["license_delivery"], value=datetime.date.fromisoformat(cit_data[14]) if cit_data[14] else None, key=f"license_delivery{key_suffix}")
             license_expiry = st.date_input(t["license_expiry"], value=datetime.date.fromisoformat(cit_data[15]) if cit_data[15] else None, key=f"license_expiry{key_suffix}")
             voting_years = st.text_input(t["voting_years"], value=cit_data[16] or "", key=f"voting_years{key_suffix}")
-            family_sponsorship = st.text_input(t["family_sponsorship"], value=cit_data[17] or "", key=f"family_sponsorship{key_suffix}")
-            school_sponsorship = st.text_input(t["school_sponsorship"], value=cit_data[18] or "", key=f"school_sponsorship{key_suffix}")
-            other_sponsorship = st.text_input(t["other_sponsorship"], value=cit_data[19] or "", key=f"other_sponsorship{key_suffix}")
+            family_sponsorship = st.text_input(t["family_sponsorship"], value=cit_data[17] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"family_sponsorship{key_suffix}")
+            school_sponsorship = st.text_input(t["school_sponsorship"], value=cit_data[18] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"school_sponsorship{key_suffix}")
+            other_sponsorship = st.text_input(t["other_sponsorship"], value=cit_data[19] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"other_sponsorship{key_suffix}")
             minister_signed = cit_data[20]
         else:
-            matricule = st.text_input(t["matricule"], key=f"matricule{key_suffix}")
+            matricule = st.text_input(t["matricule"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"matricule{key_suffix}")
             full_name = st.text_input(t["full_name"], key=f"full_name{key_suffix}")
             birth_date = st.date_input(t["birth_date"], key=f"birth_date{key_suffix}")
             birth_place = st.text_input(t["birth_place"], key=f"birth_place{key_suffix}")
             gender = st.radio(t["gender"], [t["male"], t["female"]], key=f"gender{key_suffix}")
-            cin_number = st.text_input(t["cin_number"], key=f"cin_number{key_suffix}")
+            cin_number = st.text_input(t["cin_number"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"cin_number{key_suffix}")
             cin_delivery = st.date_input(t["cin_delivery"], key=f"cin_delivery{key_suffix}")
             cin_expiry = st.date_input(t["cin_expiry"], key=f"cin_expiry{key_suffix}")
-            passport_number = st.text_input(t["passport_number"], key=f"passport_number{key_suffix}")
+            passport_number = st.text_input(t["passport_number"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"passport_number{key_suffix}")
             passport_delivery = st.date_input(t["passport_delivery"], key=f"passport_delivery{key_suffix}")
             passport_expiry = st.date_input(t["passport_expiry"], key=f"passport_expiry{key_suffix}")
-            license_number = st.text_input(t["license_number"], key=f"license_number{key_suffix}")
+            license_number = st.text_input(t["license_number"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"license_number{key_suffix}")
             license_delivery = st.date_input(t["license_delivery"], key=f"license_delivery{key_suffix}")
             license_expiry = st.date_input(t["license_expiry"], key=f"license_expiry{key_suffix}")
             voting_years = st.text_input(t["voting_years"], key=f"voting_years{key_suffix}")
-            family_sponsorship = st.text_input(t["family_sponsorship"], key=f"family_sponsorship{key_suffix}")
-            school_sponsorship = st.text_input(t["school_sponsorship"], key=f"school_sponsorship{key_suffix}")
-            other_sponsorship = st.text_input(t["other_sponsorship"], key=f"other_sponsorship{key_suffix}")
+            family_sponsorship = st.text_input(t["family_sponsorship"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"family_sponsorship{key_suffix}")
+            school_sponsorship = st.text_input(t["school_sponsorship"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"school_sponsorship{key_suffix}")
+            other_sponsorship = st.text_input(t["other_sponsorship"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"other_sponsorship{key_suffix}")
             minister_signed = False
 
         uploaded_files = st.file_uploader(t["documents"], accept_multiple_files=True, type=["pdf","jpg","jpeg","png"], key=f"files{key_suffix}")
