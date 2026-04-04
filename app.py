@@ -73,6 +73,8 @@ lang_dict = {
         "citizen_saved": "Citizen record saved.",
         "citizen_updated": "Citizen record updated.",
         "citizen_deleted": "Citizen record deleted.",
+        "show_sensitive": "👁️ Show sensitive data (CIN, NIF, Passport)",
+        "hide_sensitive": "🔒 Hide sensitive data"
     },
     "fr": {
         "title": "Base de données des Archives Nationales d'Haïti",
@@ -134,6 +136,8 @@ lang_dict = {
         "citizen_saved": "Dossier citoyen enregistré.",
         "citizen_updated": "Dossier citoyen mis à jour.",
         "citizen_deleted": "Dossier citoyen supprimé.",
+        "show_sensitive": "👁️ Afficher les données sensibles (CIN, NIF, Passeport)",
+        "hide_sensitive": "🔒 Masquer les données sensibles"
     },
     "es": {
         "title": "Base de Datos de los Archivos Nacionales de Haití",
@@ -195,6 +199,8 @@ lang_dict = {
         "citizen_saved": "Registro de ciudadano guardado.",
         "citizen_updated": "Registro de ciudadano actualizado.",
         "citizen_deleted": "Registro de ciudadano eliminado.",
+        "show_sensitive": "👁️ Mostrar datos sensibles (CIN, NIF, Pasaporte)",
+        "hide_sensitive": "🔒 Ocultar datos sensibles"
     },
     "ht": {
         "title": "Baz Done Achiv Nasyonal Ayiti",
@@ -256,6 +262,8 @@ lang_dict = {
         "citizen_saved": "Dosye sitwayen anrejistre.",
         "citizen_updated": "Dosye sitwayen mete ajou.",
         "citizen_deleted": "Dosye sitwayen efase.",
+        "show_sensitive": "👁️ Montre enfòmasyon sansib (CIN, NIF, Paspò)",
+        "hide_sensitive": "🔒 Kache enfòmasyon sansib"
     }
 }
 
@@ -339,6 +347,14 @@ def change_password(new_pwd):
     set_config("password_hash", hash_password(new_pwd))
 
 # ----------------------------------------------------------------------
+# Helper to mask sensitive data
+# ----------------------------------------------------------------------
+def mask_value(value, show):
+    if not value:
+        return ""
+    return value if show else "••••••"
+
+# ----------------------------------------------------------------------
 # Streamlit app
 # ----------------------------------------------------------------------
 init_db()
@@ -352,7 +368,6 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    # Official Haitian flag with coat of arms (reliable URL)
     st.image("https://www.countryflags.com/wp-content/uploads/haiti-flag-png-large.png", width=200)
     st.title(t["title"])
     st.markdown("### 🇭🇹 " + t["login"])
@@ -372,6 +387,19 @@ st.sidebar.write(f"**{t['developer']}**")
 st.sidebar.write(f"🏢 {t['company']}")
 st.sidebar.write(f"📧 {t['email']}")
 st.sidebar.write(f"📞 {t['phone']}")
+
+# Sensitive data toggle
+if "show_sensitive" not in st.session_state:
+    st.session_state.show_sensitive = False
+show_sensitive = st.sidebar.checkbox(
+    t["show_sensitive"], 
+    value=st.session_state.show_sensitive,
+    help="When checked, CIN, NIF and Passport numbers become visible"
+)
+if show_sensitive != st.session_state.show_sensitive:
+    st.session_state.show_sensitive = show_sensitive
+    st.rerun()
+
 if st.sidebar.button(t["logout"]):
     st.session_state.authenticated = False
     st.rerun()
@@ -402,44 +430,47 @@ st.markdown(f"<h3 style='text-align: center;'>🇭🇹 {t['year']}: {selected_ye
 tab1, tab2, tab3 = st.tabs([t["dashboard"], t["add_citizen"], t["search"]])
 
 # ----------------------------------------------------------------------
-# Dashboard: list citizens for selected year
+# Dashboard: list citizens for selected year (with masked sensitive fields)
 # ----------------------------------------------------------------------
 with tab1:
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute("SELECT id, matricule, full_name, minister_signed FROM citizens WHERE year = ?", (selected_year,))
+    c.execute("SELECT id, matricule, full_name, minister_signed, cin_number, passport_number FROM citizens WHERE year = ?", (selected_year,))
     citizens = c.fetchall()
     conn.close()
     if citizens:
         for cit in citizens:
-            col1, col2, col3 = st.columns([2,2,1])
-            with col1:
-                st.write(f"**{cit[1]}** - {cit[2]}")
-            with col2:
-                if cit[3]:
-                    st.success(t["signed_by"] + " " + "✓")
-                else:
-                    st.warning(t["not_signed"])
-            with col3:
-                if st.button(t["edit_citizen"], key=f"edit_{cit[0]}"):
-                    st.session_state.edit_id = cit[0]
-                    st.rerun()
-                if st.button(t["delete"], key=f"del_{cit[0]}"):
-                    if st.checkbox(t["confirm_delete"], key=f"confirm_{cit[0]}"):
-                        conn = sqlite3.connect(DB_NAME)
-                        c = conn.cursor()
-                        c.execute("DELETE FROM citizens WHERE id = ?", (cit[0],))
-                        c.execute("DELETE FROM citizen_files WHERE citizen_id = ?", (cit[0],))
-                        conn.commit()
-                        conn.close()
-                        st.success(t["citizen_deleted"])
+            # Mask sensitive fields if needed
+            matricule_display = mask_value(cit[1], st.session_state.show_sensitive)
+            cin_display = mask_value(cit[4], st.session_state.show_sensitive)
+            passport_display = mask_value(cit[5], st.session_state.show_sensitive)
+            
+            with st.expander(f"{cit[2]} (NIF: {matricule_display})"):
+                col1, col2 = st.columns([3,1])
+                with col1:
+                    st.write(f"**CIN:** {cin_display}")
+                    st.write(f"**Passport:** {passport_display}")
+                    st.write(f"**Minister signed:** {'Yes' if cit[3] else 'No'}")
+                with col2:
+                    if st.button(t["edit_citizen"], key=f"edit_{cit[0]}"):
+                        st.session_state.edit_id = cit[0]
                         st.rerun()
+                    if st.button(t["delete"], key=f"del_{cit[0]}"):
+                        if st.checkbox(t["confirm_delete"], key=f"confirm_{cit[0]}"):
+                            conn = sqlite3.connect(DB_NAME)
+                            c2 = conn.cursor()
+                            c2.execute("DELETE FROM citizens WHERE id = ?", (cit[0],))
+                            c2.execute("DELETE FROM citizen_files WHERE citizen_id = ?", (cit[0],))
+                            conn.commit()
+                            conn.close()
+                            st.success(t["citizen_deleted"])
+                            st.rerun()
             st.divider()
     else:
         st.info(f"No citizens found for year {selected_year}. Use 'Add Citizen' tab.")
 
 # ----------------------------------------------------------------------
-# Add / Edit Citizen (with unique keys)
+# Add / Edit Citizen (edit form always shows actual numbers)
 # ----------------------------------------------------------------------
 with tab2:
     edit_mode = "edit_id" in st.session_state
@@ -577,7 +608,7 @@ with tab2:
             st.rerun()
 
 # ----------------------------------------------------------------------
-# Search tab
+# Search tab (mask sensitive fields in results)
 # ----------------------------------------------------------------------
 with tab3:
     search_term = st.text_input("Search by name, matricule, or document ID")
@@ -588,7 +619,12 @@ with tab3:
         results = c.fetchall()
         if results:
             for r in results:
-                st.write(f"**{r[2]}** - {r[3]} - Signed: {'Yes' if r[20] else 'No'}")
+                matricule_display = mask_value(r[2], st.session_state.show_sensitive)
+                cin_display = mask_value(r[7], st.session_state.show_sensitive)
+                passport_display = mask_value(r[10], st.session_state.show_sensitive)
+                st.write(f"**{r[3]}** - NIF: {matricule_display}")
+                st.write(f"CIN: {cin_display} | Passport: {passport_display}")
+                st.write(f"Signed: {'Yes' if r[20] else 'No'}")
                 c2 = conn.cursor()
                 c2.execute("SELECT file_name, upload_date FROM citizen_files WHERE citizen_id=?", (r[0],))
                 files = c2.fetchall()
