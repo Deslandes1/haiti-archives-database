@@ -3,18 +3,64 @@ import sqlite3
 import os
 import datetime
 import hashlib
+import tempfile
+from gtts import gTTS
 
 # ----------------------------------------------------------------------
 # Page config
 # ----------------------------------------------------------------------
-st.set_page_config(page_title="Haiti Archives Nationales Database", layout="wide")
+st.set_page_config(
+    page_title="HAITIAN CITIZENSHIP DATA BASE",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 # ----------------------------------------------------------------------
-# Multi-language dictionary
+# Custom CSS for light blue theme
+# ----------------------------------------------------------------------
+st.markdown("""
+<style>
+    .stApp {
+        background-color: #e6f2ff !important;
+    }
+    [data-testid="stSidebar"] {
+        background-color: #b8d9ff !important;
+        border-right: 1px solid #90b8e0;
+    }
+    .stApp > header {
+        background-color: #e6f2ff !important;
+    }
+    .stButton>button {
+        background-color: #2c7be5;
+        color: white;
+        border-radius: 25px;
+    }
+    .stButton>button:hover {
+        background-color: #1a5bbf;
+    }
+    .stTextInput>div>div>input, .stTextArea>div>div>textarea {
+        background-color: white;
+    }
+    .login-title {
+        text-align: center;
+        color: #1e3c72;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    .login-subtitle {
+        text-align: center;
+        color: #2a4a7a;
+        font-size: 1.2rem;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ----------------------------------------------------------------------
+# Multi-language dictionary (including explanation texts)
 # ----------------------------------------------------------------------
 lang_dict = {
     "en": {
-        "title": "Haiti Archives Nationales Database",
+        "title": "HAITIAN CITIZENSHIP DATA BASE",
         "login": "🔐 Login",
         "password": "Enter annual password",
         "wrong_password": "Incorrect password. Access denied.",
@@ -55,7 +101,7 @@ lang_dict = {
         "not_signed": "Not yet validated",
         "developer": "Software Python Developer: Gesner Deslandes",
         "company": "GlobalInternet.py",
-        "email": "deslndes78@gmail.com",
+        "email": "deslandes78@gmail.com",
         "phone": "(509) 4738-5663",
         "save": "Save",
         "update": "Update",
@@ -76,10 +122,12 @@ lang_dict = {
         "show_sensitive": "👁️ Show sensitive data in lists (CIN, NIF, Passport)",
         "hide_sensitive": "🔒 Hide sensitive data in lists",
         "show_form_sensitive": "👁️ Show sensitive fields in form (reveal values)",
-        "hide_form_sensitive": "🔒 Hide sensitive fields in form (show as dots)"
+        "hide_form_sensitive": "🔒 Hide sensitive fields in form (show as dots)",
+        "explain_btn": "🎙️ AI Voice Explanation (Female)",
+        "explain_text": "This is the Haitian Citizenship Data Base software. It allows you to manage citizen records including NIF, CIN, passport, driver's license, voting history, sponsorships, and upload documents. You can archive by year, validate with minister signature, and search records securely. Built by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py."
     },
     "fr": {
-        "title": "Base de données des Archives Nationales d'Haïti",
+        "title": "BASE DE DONNÉES DE LA CITOYENNETÉ HAÏTIENNE",
         "login": "🔐 Connexion",
         "password": "Entrez le mot de passe annuel",
         "wrong_password": "Mot de passe incorrect. Accès refusé.",
@@ -120,7 +168,7 @@ lang_dict = {
         "not_signed": "Non encore validé",
         "developer": "Développeur Python: Gesner Deslandes",
         "company": "GlobalInternet.py",
-        "email": "deslndes78@gmail.com",
+        "email": "deslandes78@gmail.com",
         "phone": "(509) 4738-5663",
         "save": "Enregistrer",
         "update": "Mettre à jour",
@@ -141,10 +189,12 @@ lang_dict = {
         "show_sensitive": "👁️ Afficher les données sensibles dans les listes (CIN, NIF, Passeport)",
         "hide_sensitive": "🔒 Masquer les données sensibles dans les listes",
         "show_form_sensitive": "👁️ Afficher les champs sensibles dans le formulaire (révéler les valeurs)",
-        "hide_form_sensitive": "🔒 Masquer les champs sensibles dans le formulaire (afficher des points)"
+        "hide_form_sensitive": "🔒 Masquer les champs sensibles dans le formulaire (afficher des points)",
+        "explain_btn": "🎙️ Explication vocale IA (femme)",
+        "explain_text": "Ceci est le logiciel Base de données de la citoyenneté haïtienne. Il vous permet de gérer les dossiers des citoyens, y compris le NIF, la CIN, le passeport, le permis de conduire, l'historique de vote, les parrainages, et de télécharger des documents. Vous pouvez archiver par année, valider avec la signature du ministre, et rechercher des enregistrements en toute sécurité. Construit par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py."
     },
     "es": {
-        "title": "Base de Datos de los Archivos Nacionales de Haití",
+        "title": "BASE DE DATOS DE CIUDADANÍA HAITIANA",
         "login": "🔐 Iniciar sesión",
         "password": "Ingrese la contraseña anual",
         "wrong_password": "Contraseña incorrecta. Acceso denegado.",
@@ -185,7 +235,7 @@ lang_dict = {
         "not_signed": "Aún no validado",
         "developer": "Desarrollador Python: Gesner Deslandes",
         "company": "GlobalInternet.py",
-        "email": "deslndes78@gmail.com",
+        "email": "deslandes78@gmail.com",
         "phone": "(509) 4738-5663",
         "save": "Guardar",
         "update": "Actualizar",
@@ -206,10 +256,12 @@ lang_dict = {
         "show_sensitive": "👁️ Mostrar datos sensibles en listas (CIN, NIF, Pasaporte)",
         "hide_sensitive": "🔒 Ocultar datos sensibles en listas",
         "show_form_sensitive": "👁️ Mostrar campos sensibles en el formulario (revelar valores)",
-        "hide_form_sensitive": "🔒 Ocultar campos sensibles en el formulario (mostrar puntos)"
+        "hide_form_sensitive": "🔒 Ocultar campos sensibles en el formulario (mostrar puntos)",
+        "explain_btn": "🎙️ Explicación por voz IA (mujer)",
+        "explain_text": "Este es el software Base de Datos de Ciudadanía Haitiana. Le permite gestionar registros de ciudadanos, incluyendo NIF, CIN, pasaporte, licencia de conducir, historial de votación, patrocinios, y subir documentos. Puede archivar por año, validar con firma de ministro, y buscar registros de forma segura. Construido por Gesner Deslandes, ingeniero jefe de GlobalInternet.py."
     },
     "ht": {
-        "title": "Baz Done Achiv Nasyonal Ayiti",
+        "title": "BAZ DON SITWAYENTE AYISYEN",
         "login": "🔐 Konekte",
         "password": "Antre modpas anyèl la",
         "wrong_password": "Modpas pa bon. Aksè refize.",
@@ -250,7 +302,7 @@ lang_dict = {
         "not_signed": "Pokò valide",
         "developer": "Devlopè Python: Gesner Deslandes",
         "company": "GlobalInternet.py",
-        "email": "deslndes78@gmail.com",
+        "email": "deslandes78@gmail.com",
         "phone": "(509) 4738-5663",
         "save": "Sere",
         "update": "Mete ajou",
@@ -271,9 +323,35 @@ lang_dict = {
         "show_sensitive": "👁️ Montre enfòmasyon sansib nan lis yo (CIN, NIF, Paspò)",
         "hide_sensitive": "🔒 Kache enfòmasyon sansib nan lis yo",
         "show_form_sensitive": "👁️ Montre jaden sansib nan fòmilè a (wè valè yo)",
-        "hide_form_sensitive": "🔒 Kache jaden sansib nan fòmilè a (montre pwen)"
+        "hide_form_sensitive": "🔒 Kache jaden sansib nan fòmilè a (montre pwen)",
+        "explain_btn": "🎙️ Eksplikasyon vwa IA (fanm)",
+        "explain_text": "Sa a se lojisyèl Baz Done Sitwayente Ayisyen. Li pèmèt ou jere dosye sitwayen yo, tankou NIF, CIN, paspò, pèmi kondwi, istwa vòt, patenarya, ak telechaje dokiman. Ou ka achiveman pa ane, valide ak siyati Minis la, ak chèche dosye an sekirite. Konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py."
     }
 }
+
+# ----------------------------------------------------------------------
+# Voice generation function
+# ----------------------------------------------------------------------
+def generate_audio(text, lang):
+    lang_map = {"en": "en", "fr": "fr", "es": "es", "ht": "fr"}  # gTTS doesn't support ht, use French for Creole
+    import re
+    clean_text = re.sub(r'[^\x00-\x7F]+', '', text)[:1500]
+    if not clean_text.strip():
+        return None
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
+        tmp_path = tmp.name
+    try:
+        tts = gTTS(text=clean_text, lang=lang_map.get(lang, "en"), slow=False)
+        tts.save(tmp_path)
+        with open(tmp_path, "rb") as f:
+            audio_bytes = f.read()
+        return audio_bytes
+    except Exception as e:
+        st.error(f"Voice error: {e}")
+        return None
+    finally:
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
 
 # ----------------------------------------------------------------------
 # Database setup (SQLite)
@@ -367,8 +445,12 @@ def mask_value(value, show):
 # ----------------------------------------------------------------------
 init_db()
 
-# Language selection
-lang = st.sidebar.selectbox("Language", list(lang_dict.keys()), format_func=lambda x: {"en":"English","fr":"Français","es":"Español","ht":"Kreyòl"}[x])
+# Language selection (sidebar)
+lang = st.sidebar.selectbox(
+    "Language",
+    list(lang_dict.keys()),
+    format_func=lambda x: {"en":"English","fr":"Français","es":"Español","ht":"Kreyòl"}[x]
+)
 t = lang_dict[lang]
 
 # Login mechanism
@@ -376,9 +458,9 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.image("https://www.countryflags.com/wp-content/uploads/haiti-flag-png-large.png", width=200)
-    st.title(t["title"])
-    st.markdown("### 🇭🇹 " + t["login"])
+    st.image("https://www.countryflags.com/wp-content/uploads/haiti-flag-png-large.png", width=150)
+    st.markdown(f"<h1 class='login-title'>{t['title']}</h1>", unsafe_allow_html=True)
+    st.markdown(f"<p class='login-subtitle'>{t['login']}</p>", unsafe_allow_html=True)
     pwd = st.text_input(t["password"], type="password")
     if st.button(t["login"]):
         if verify_password(pwd):
@@ -395,6 +477,18 @@ st.sidebar.write(f"**{t['developer']}**")
 st.sidebar.write(f"🏢 {t['company']}")
 st.sidebar.write(f"📧 {t['email']}")
 st.sidebar.write(f"📞 {t['phone']}")
+
+# ----- AI Voice Explanation Button -----
+if st.sidebar.button(t["explain_btn"], use_container_width=True):
+    with st.spinner("Generating voice explanation..."):
+        audio_bytes = generate_audio(t["explain_text"], lang)
+        if audio_bytes:
+            st.sidebar.audio(audio_bytes, format="audio/mp3")
+            st.sidebar.success("Explanation played. Click again to repeat.")
+        else:
+            st.sidebar.error("Could not generate explanation audio.")
+
+st.sidebar.markdown("---")
 
 # Two toggles: one for dashboard/search, one for form
 if "show_sensitive" not in st.session_state:
