@@ -124,7 +124,7 @@ lang_dict = {
         "show_form_sensitive": "👁️ Show sensitive fields in form (reveal values)",
         "hide_form_sensitive": "🔒 Hide sensitive fields in form (show as dots)",
         "explain_btn": "🎙️ AI Voice Explanation",
-        # Updated detailed explanation
+        # Detailed explanation with concluding sentence
         "explain_text": """This is the Haitian Citizenship Data Base software. It allows you to manage citizen records with the following features:
 
 - Personal information: full name, date of birth, place of birth, gender, and NIF (tax identification number).
@@ -140,7 +140,7 @@ lang_dict = {
 - Sensitive data masking: you can choose to show or hide sensitive numbers in lists and forms.
 - AI voice explanation: this button provides an audio description of the system's features.
 
-The software was developed by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py.""",
+To conclude, this Haitian Citizenship Data Base was built by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py.""",
         # New keys for parents and witness
         "mother": "Mother's Full Name",
         "father": "Father's Full Name",
@@ -231,7 +231,7 @@ The software was developed by Gesner Deslandes, Engineer‑in‑Chief at GlobalI
 - Masquage des données sensibles : vous pouvez choisir d'afficher ou de masquer les numéros sensibles dans les listes et les formulaires.
 - Explication vocale IA : ce bouton fournit une description audio des fonctionnalités du système.
 
-Le logiciel a été développé par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py.""",
+Pour conclure, cette Base de Données de la Citoyenneté Haïtienne a été construite par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py.""",
         "mother": "Nom complet de la mère",
         "father": "Nom complet du père",
         "witness": "Nom du témoin",
@@ -321,7 +321,7 @@ Le logiciel a été développé par Gesner Deslandes, ingénieur en chef chez Gl
 - Enmascaramiento de datos sensibles: puede elegir mostrar u ocultar números sensibles en listas y formularios.
 - Explicación por voz IA: este botón proporciona una descripción de audio de las características del sistema.
 
-El software fue desarrollado por Gesner Deslandes, ingeniero jefe de GlobalInternet.py.""",
+Para concluir, esta Base de Datos de Ciudadanía Haitiana fue construida por Gesner Deslandes, ingeniero jefe de GlobalInternet.py.""",
         "mother": "Nombre completo de la madre",
         "father": "Nombre completo del padre",
         "witness": "Nombre del testigo",
@@ -411,7 +411,7 @@ El software fue desarrollado por Gesner Deslandes, ingeniero jefe de GlobalInter
 - Maskaj done sansib: ou ka chwazi montre oswa kache nimewo sansib nan lis ak fòmilè.
 - Eksplikasyon vwa IA: bouton sa a bay yon deskripsyon odyo sou karakteristik sistèm nan.
 
-Lojisyèl la devlope pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py.""",
+Pou konklu, Baz Done Sitwayènte Ayisyen sa a te konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py.""",
         "mother": "Non konplè manman",
         "father": "Non konplè papa",
         "witness": "Non temwen",
