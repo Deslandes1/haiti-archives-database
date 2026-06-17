@@ -10,7 +10,7 @@ from gtts import gTTS
 # Page config
 # ----------------------------------------------------------------------
 st.set_page_config(
-    page_title="HAITIAN CITIZENSHIP DATA BASE",
+    page_title="Haitian Citizenship Data Base",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -261,7 +261,7 @@ lang_dict = {
         "explain_text": "Este es el software Base de Datos de Ciudadanía Haitiana. Le permite gestionar registros de ciudadanos, incluyendo NIF, CIN, pasaporte, licencia de conducir, historial de votación, patrocinios, y subir documentos. Puede archivar por año, validar con firma de ministro, y buscar registros de forma segura. Construido por Gesner Deslandes, ingeniero jefe de GlobalInternet.py."
     },
     "ht": {
-        "title": "BAZ DON SITWAYENTE AYISYEN",
+        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
         "login": "🔐 Konekte",
         "password": "Antre modpas anyèl la",
         "wrong_password": "Modpas pa bon. Aksè refize.",
@@ -325,7 +325,7 @@ lang_dict = {
         "show_form_sensitive": "👁️ Montre jaden sansib nan fòmilè a (wè valè yo)",
         "hide_form_sensitive": "🔒 Kache jaden sansib nan fòmilè a (montre pwen)",
         "explain_btn": "🎙️ Eksplikasyon vwa IA (fanm)",
-        "explain_text": "Sa a se lojisyèl Baz Done Sitwayente Ayisyen. Li pèmèt ou jere dosye sitwayen yo, tankou NIF, CIN, paspò, pèmi kondwi, istwa vòt, patenarya, ak telechaje dokiman. Ou ka achiveman pa ane, valide ak siyati Minis la, ak chèche dosye an sekirite. Konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py."
+        "explain_text": "Sa a se lojisyèl Baz Done Sitwayènte Ayisyen. Li pèmèt ou jere dosye sitwayen yo, tankou NIF, CIN, paspò, pèmi kondwi, istwa vòt, patenarya, ak telechaje dokiman. Ou ka achiveman pa ane, valide ak siyati Minis la, ak chèche dosye an sekirite. Konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py."
     }
 }
 
