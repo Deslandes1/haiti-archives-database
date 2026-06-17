@@ -124,24 +124,8 @@ lang_dict = {
         "show_form_sensitive": "👁️ Show sensitive fields in form (reveal values)",
         "hide_form_sensitive": "🔒 Hide sensitive fields in form (show as dots)",
         "explain_btn": "🎙️ AI Voice Explanation",
-        # Detailed explanation with concluding sentence
-        "explain_text": """This is the Haitian Citizenship Data Base software. It allows you to manage citizen records with the following features:
-
-- Personal information: full name, date of birth, place of birth, gender, and NIF (tax identification number).
-- Parents: mother's full name and father's full name are recorded.
-- Witness: for verification of parentage, a witness name is required along with the witness's document type (CIN, Passport, or Driver's License) and document number.
-- Official documents: CIN card details (number, delivery date, expiry), Passport details (number, delivery, expiry), Driver's License details (number, delivery, expiry).
-- Voting history: years the citizen voted, entered as comma-separated years.
-- Sponsorships: family, school, and other sponsorship IDs can be stored.
-- Document upload: you can attach PDF, JPG, or PNG files to each citizen record.
-- Minister validation: a minister can sign and validate the file, storing the signature date and minister's name.
-- Yearly archiving: data is organized by year, and you can switch between years.
-- Secure access: an annual password is required to log in, and it can be changed.
-- Sensitive data masking: you can choose to show or hide sensitive numbers in lists and forms.
-- AI voice explanation: this button provides an audio description of the system's features.
-
-To conclude, this Haitian Citizenship Data Base was built by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py.""",
-        # New keys for parents and witness
+        # Updated detailed explanation following the main page order
+        "explain_text": """This is the Haitian Citizenship Data Base software. The main page displays the title and the current year. Under the 'Add Citizen' tab, you can enter the citizen's tax identification number or NIF, full name, date of birth, place of birth, and gender. Then you enter the CIN card number, delivery date, and expiry date. Next, the passport number, delivery date, and expiry date. Then the driver's license number, delivery date, and expiry date. After that, the years the citizen voted, separated by commas. You can then enter family sponsorship ID, school sponsorship ID, and other sponsorship ID. Then provide the mother's full name, father's full name, and the witness's name. You must also select the witness's document type: CIN, Passport, or Driver's License, and enter the witness document number. You can upload documents in PDF, JPG, or PNG format. Finally, a minister can sign and validate the file by entering the minister's name and clicking the sign button, and then you save the record. On the sidebar, you see the developer information, company, email, and phone. You can select the language, choose the year, change the annual password, and also click this button for an AI voice explanation. To conclude, this Haitian Citizenship Data Base was built by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py.""",
         "mother": "Mother's Full Name",
         "father": "Father's Full Name",
         "witness": "Witness Name",
@@ -216,22 +200,7 @@ To conclude, this Haitian Citizenship Data Base was built by Gesner Deslandes, E
         "show_form_sensitive": "👁️ Afficher les champs sensibles dans le formulaire (révéler les valeurs)",
         "hide_form_sensitive": "🔒 Masquer les champs sensibles dans le formulaire (afficher des points)",
         "explain_btn": "🎙️ Explication vocale IA",
-        "explain_text": """Ceci est le logiciel Base de données de la citoyenneté haïtienne. Il vous permet de gérer les dossiers des citoyens avec les fonctionnalités suivantes :
-
-- Informations personnelles : nom complet, date de naissance, lieu de naissance, sexe et NIF (numéro d'identification fiscale).
-- Parents : le nom complet de la mère et le nom complet du père sont enregistrés.
-- Témoin : pour vérifier la filiation, un nom de témoin est requis ainsi que le type de document du témoin (CIN, Passeport ou Permis de conduire) et le numéro de document.
-- Documents officiels : détails de la carte CIN (numéro, date de délivrance, expiration), du Passeport (numéro, délivrance, expiration), du Permis de conduire (numéro, délivrance, expiration).
-- Historique de vote : années où le citoyen a voté, saisies sous forme d'années séparées par des virgules.
-- Parrainages : identifiants de parrainage familial, scolaire et autre peuvent être stockés.
-- Téléchargement de documents : vous pouvez joindre des fichiers PDF, JPG ou PNG à chaque dossier citoyen.
-- Validation ministérielle : un ministre peut signer et valider le dossier, enregistrant la date de signature et le nom du ministre.
-- Archivage annuel : les données sont organisées par année et vous pouvez basculer entre les années.
-- Accès sécurisé : un mot de passe annuel est requis pour se connecter et peut être changé.
-- Masquage des données sensibles : vous pouvez choisir d'afficher ou de masquer les numéros sensibles dans les listes et les formulaires.
-- Explication vocale IA : ce bouton fournit une description audio des fonctionnalités du système.
-
-Pour conclure, cette Base de Données de la Citoyenneté Haïtienne a été construite par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py.""",
+        "explain_text": """Ceci est le logiciel Base de données de la citoyenneté haïtienne. La page principale affiche le titre et l'année en cours. Sous l'onglet 'Ajouter un citoyen', vous pouvez saisir le numéro d'identification fiscale ou NIF, le nom complet, la date de naissance, le lieu de naissance et le sexe. Ensuite, vous entrez le numéro de la carte CIN, la date de délivrance et la date d'expiration. Puis le numéro de passeport, la date de délivrance et la date d'expiration. Ensuite le numéro de permis de conduire, la date de délivrance et la date d'expiration. Après cela, les années où le citoyen a voté, séparées par des virgules. Vous pouvez ensuite saisir l'ID de parrainage familial, l'ID de parrainage scolaire et un autre ID de parrainage. Ensuite, fournissez le nom complet de la mère, le nom complet du père et le nom du témoin. Vous devez également sélectionner le type de document du témoin : CIN, Passeport ou Permis de conduire, et saisir le numéro de document du témoin. Vous pouvez télécharger des documents au format PDF, JPG ou PNG. Enfin, un ministre peut signer et valider le dossier en entrant le nom du ministre et en cliquant sur le bouton de signature, puis vous enregistrez le dossier. Sur la barre latérale, vous voyez les informations du développeur, l'entreprise, l'email et le téléphone. Vous pouvez sélectionner la langue, choisir l'année, changer le mot de passe annuel, et également cliquer sur ce bouton pour une explication vocale IA. Pour conclure, cette Base de Données de la Citoyenneté Haïtienne a été construite par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py.""",
         "mother": "Nom complet de la mère",
         "father": "Nom complet du père",
         "witness": "Nom du témoin",
@@ -306,22 +275,7 @@ Pour conclure, cette Base de Données de la Citoyenneté Haïtienne a été cons
         "show_form_sensitive": "👁️ Mostrar campos sensibles en el formulario (revelar valores)",
         "hide_form_sensitive": "🔒 Ocultar campos sensibles en el formulario (mostrar puntos)",
         "explain_btn": "🎙️ Explicación por voz IA",
-        "explain_text": """Este es el software Base de Datos de Ciudadanía Haitiana. Le permite gestionar registros de ciudadanos con las siguientes características:
-
-- Información personal: nombre completo, fecha de nacimiento, lugar de nacimiento, género y NIF (número de identificación fiscal).
-- Padres: se registran el nombre completo de la madre y el nombre completo del padre.
-- Testigo: para verificar la filiación, se requiere el nombre de un testigo, así como el tipo de documento del testigo (CIN, Pasaporte o Licencia de conducir) y el número de documento.
-- Documentos oficiales: detalles de la cédula CIN (número, fecha de entrega, vencimiento), Pasaporte (número, entrega, vencimiento), Licencia de conducir (número, entrega, vencimiento).
-- Historial de votación: años en que el ciudadano votó, ingresados como años separados por comas.
-- Patrocinios: se pueden almacenar identificadores de patrocinio familiar, escolar y otro.
-- Carga de documentos: puede adjuntar archivos PDF, JPG o PNG a cada registro de ciudadano.
-- Validación ministerial: un ministro puede firmar y validar el expediente, registrando la fecha de firma y el nombre del ministro.
-- Archivo anual: los datos se organizan por año y puede cambiar entre años.
-- Acceso seguro: se requiere una contraseña anual para iniciar sesión y se puede cambiar.
-- Enmascaramiento de datos sensibles: puede elegir mostrar u ocultar números sensibles en listas y formularios.
-- Explicación por voz IA: este botón proporciona una descripción de audio de las características del sistema.
-
-Para concluir, esta Base de Datos de Ciudadanía Haitiana fue construida por Gesner Deslandes, ingeniero jefe de GlobalInternet.py.""",
+        "explain_text": """Este es el software Base de Datos de Ciudadanía Haitiana. La página principal muestra el título y el año actual. En la pestaña 'Agregar ciudadano', puede ingresar el número de identificación fiscal o NIF, el nombre completo, la fecha de nacimiento, el lugar de nacimiento y el género. Luego ingresa el número de la cédula CIN, la fecha de entrega y la fecha de vencimiento. Luego el número de pasaporte, la fecha de entrega y la fecha de vencimiento. Luego el número de licencia de conducir, la fecha de entrega y la fecha de vencimiento. Después, los años en que el ciudadano votó, separados por comas. Puede ingresar el ID de patrocinio familiar, ID de patrocinio escolar y otro ID de patrocinio. Luego proporcione el nombre completo de la madre, el nombre completo del padre y el nombre del testigo. También debe seleccionar el tipo de documento del testigo: CIN, Pasaporte o Licencia de conducir, e ingresar el número de documento del testigo. Puede cargar documentos en formato PDF, JPG o PNG. Finalmente, un ministro puede firmar y validar el expediente ingresando el nombre del ministro y haciendo clic en el botón de firma, y luego guarda el registro. En la barra lateral, ve la información del desarrollador, la empresa, el correo electrónico y el teléfono. Puede seleccionar el idioma, elegir el año, cambiar la contraseña anual y también hacer clic en este botón para obtener una explicación por voz IA. Para concluir, esta Base de Datos de Ciudadanía Haitiana fue construida por Gesner Deslandes, ingeniero jefe de GlobalInternet.py.""",
         "mother": "Nombre completo de la madre",
         "father": "Nombre completo del padre",
         "witness": "Nombre del testigo",
@@ -396,22 +350,7 @@ Para concluir, esta Base de Datos de Ciudadanía Haitiana fue construida por Ges
         "show_form_sensitive": "👁️ Montre jaden sansib nan fòmilè a (wè valè yo)",
         "hide_form_sensitive": "🔒 Kache jaden sansib nan fòmilè a (montre pwen)",
         "explain_btn": "🔇 Pa gen vwa pou lang sa a (lekti sèlman)",
-        "explain_text": """Sa a se lojisyèl Baz Done Sitwayènte Ayisyen. Li pèmèt ou jere dosye sitwayen yo ak karakteristik sa yo:
-
-- Enfòmasyon pèsonèl: non konplè, dat nesans, kote li fèt, sèks ak NIF (nimewo idantifikasyon fiskal).
-- Paran: non konplè manman an ak non konplè papa a anrejistre.
-- Temwen: pou verifye filiyasyon, yo egzije non yon temwen ansanm ak kalite dokiman temwen an (CIN, Paspò oswa Pèmi Kondwi) ak nimewo dokiman an.
-- Dokiman ofisyèl: detay kat CIN (nimewo, dat livrezon, ekspirasyon), Paspò (nimewo, livrezon, ekspirasyon), Pèmi Kondwi (nimewo, livrezon, ekspirasyon).
-- Istwa vòt: ane sitwayen an te vote, antre kòm ane separe ak vigil.
-- Patenarya: idantifyan patenarya fanmi, lekòl ak lòt ka estoke.
-- Chaje dokiman: ou ka tache dosye PDF, JPG oswa PNG ak chak dosye sitwayen.
-- Validasyon minisyèl: yon minis ka siyen ak valide dosye a, anrejistre dat siyati a ak non minis la.
-- Achivman anyèl: done yo òganize pa ane epi ou ka chanje ant ane.
-- Aksè sekirize: yon modpas anyèl obligatwa pou konekte epi li ka chanje.
-- Maskaj done sansib: ou ka chwazi montre oswa kache nimewo sansib nan lis ak fòmilè.
-- Eksplikasyon vwa IA: bouton sa a bay yon deskripsyon odyo sou karakteristik sistèm nan.
-
-Pou konklu, Baz Done Sitwayènte Ayisyen sa a te konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py.""",
+        "explain_text": """Sa a se lojisyèl Baz Done Sitwayènte Ayisyen. Paj prensipal la montre tit la ak ane aktyèl la. Sou tab 'Ajoute yon sitwayen', ou ka antre nimewo idantifikasyon fiskal oswa NIF, non konplè, dat nesans, kote li fèt, ak sèks. Apre sa, ou antre nimewo kat CIN, dat livrezon ak dat ekspirasyon. Lè sa a, nimewo paspò, dat livrezon ak dat ekspirasyon. Lè sa a, nimewo pèmi kondwi, dat livrezon ak dat ekspirasyon. Apre sa, ane sitwayen an te vote, separe ak vigil. Ou ka antre ID patenarya fanmi, ID patenarya lekòl ak lòt ID patenarya. Lè sa a, bay non konplè manman an, non konplè papa a ak non temwen an. Ou dwe chwazi kalite dokiman temwen an: CIN, Paspò oswa Pèmi Kondwi, epi antre nimewo dokiman temwen an. Ou ka telechaje dokiman nan fòma PDF, JPG oswa PNG. Finalman, yon minis ka siyen ak valide dosye a lè li antre non minis la epi li klike sou bouton siyati a, epi ou sere dosye a. Nan ba latéral, ou wè enfòmasyon devlopè a, konpayi an, imèl ak telefòn. Ou ka chwazi lang lan, chwazi ane a, chanje modpas anyèl la, epi tou klike sou bouton sa a pou yon eksplikasyon vwa IA. Pou konklu, Baz Done Sitwayènte Ayisyen sa a te konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py.""",
         "mother": "Non konplè manman",
         "father": "Non konplè papa",
         "witness": "Non temwen",
