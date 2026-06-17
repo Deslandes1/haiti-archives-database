@@ -10,7 +10,7 @@ from gtts import gTTS
 # Page config
 # ----------------------------------------------------------------------
 st.set_page_config(
-    page_title="BAZ DONE SITWAYÈNTE AYISYEN",
+    page_title="Haitian Citizenship Data Base",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -56,11 +56,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------
-# Multi-language dictionary (English, French, Spanish, Haitian Creole)
+# Multi-language dictionary (all labels translated)
 # ----------------------------------------------------------------------
 lang_dict = {
     "en": {
-        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
+        "title": "HAITIAN CITIZENSHIP DATA BASE",
         "login": "🔐 Login",
         "password": "Enter annual password",
         "wrong_password": "Incorrect password. Access denied.",
@@ -127,7 +127,7 @@ lang_dict = {
         "explain_text": "This is the Haitian Citizenship Data Base software. It allows you to manage citizen records including NIF, CIN, passport, driver's license, voting history, sponsorships, and upload documents. You can archive by year, validate with minister signature, and search records securely. Built by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py."
     },
     "fr": {
-        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
+        "title": "BASE DE DONNÉES DE LA CITOYENNETÉ HAÏTIENNE",
         "login": "🔐 Connexion",
         "password": "Entrez le mot de passe annuel",
         "wrong_password": "Mot de passe incorrect. Accès refusé.",
@@ -194,7 +194,7 @@ lang_dict = {
         "explain_text": "Ceci est le logiciel Base de données de la citoyenneté haïtienne. Il vous permet de gérer les dossiers des citoyens, y compris le NIF, la CIN, le passeport, le permis de conduire, l'historique de vote, les parrainages, et de télécharger des documents. Vous pouvez archiver par année, valider avec la signature du ministre, et rechercher des enregistrements en toute sécurité. Construit par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py."
     },
     "es": {
-        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
+        "title": "BASE DE DATOS DE CIUDADANÍA HAITIANA",
         "login": "🔐 Iniciar sesión",
         "password": "Ingrese la contraseña anual",
         "wrong_password": "Contraseña incorrecta. Acceso denegado.",
@@ -330,10 +330,9 @@ lang_dict = {
 }
 
 # ----------------------------------------------------------------------
-# Voice generation function
+# Voice generation function (only for en, fr, es)
 # ----------------------------------------------------------------------
 def generate_audio(text, lang):
-    # Only generate voice for English, French, Spanish
     if lang not in ["en", "fr", "es"]:
         return None
     lang_map = {"en": "en", "fr": "fr", "es": "es"}
@@ -357,7 +356,7 @@ def generate_audio(text, lang):
             os.unlink(tmp_path)
 
 # ----------------------------------------------------------------------
-# Database setup (SQLite)
+# Database setup (SQLite) – unchanged
 # ----------------------------------------------------------------------
 DB_NAME = "haiti_archives.db"
 
@@ -435,9 +434,6 @@ def get_config(key):
 def change_password(new_pwd):
     set_config("password_hash", hash_password(new_pwd))
 
-# ----------------------------------------------------------------------
-# Helper to mask sensitive data
-# ----------------------------------------------------------------------
 def mask_value(value, show):
     if not value:
         return ""
@@ -448,7 +444,7 @@ def mask_value(value, show):
 # ----------------------------------------------------------------------
 init_db()
 
-# Language selection (English, French, Spanish, Haitian Creole)
+# Language selection
 lang_options = ["en", "fr", "es", "ht"]
 lang = st.sidebar.selectbox(
     "Language",
@@ -483,7 +479,6 @@ st.sidebar.write(f"📧 {t['email']}")
 st.sidebar.write(f"📞 {t['phone']}")
 
 # ----- AI Voice Explanation Button -----
-# For Haitian Creole, show a message instead of voice
 if lang == "ht":
     st.sidebar.info("🔇 Voice explanation is not available for Haitian Creole. Please use English, French, or Spanish for voice.")
 else:
@@ -498,7 +493,7 @@ else:
 
 st.sidebar.markdown("---")
 
-# Two toggles: one for dashboard/search, one for form
+# Two toggles
 if "show_sensitive" not in st.session_state:
     st.session_state.show_sensitive = False
 if "show_form_sensitive" not in st.session_state:
@@ -530,6 +525,7 @@ if st.sidebar.button(t["logout"]):
 years = list(range(2020, get_current_year()+2))
 selected_year = st.sidebar.selectbox(t["select_year"], years, index=years.index(get_current_year()))
 st.sidebar.markdown("---")
+
 # Admin: change password
 with st.sidebar.expander(t["change_password"]):
     old = st.text_input(t["current_password"], type="password")
@@ -552,7 +548,7 @@ st.markdown(f"<h3 style='text-align: center;'>🇭🇹 {t['year']}: {selected_ye
 tab1, tab2, tab3 = st.tabs([t["dashboard"], t["add_citizen"], t["search"]])
 
 # ----------------------------------------------------------------------
-# Dashboard: list citizens for selected year (with masked sensitive fields)
+# Dashboard
 # ----------------------------------------------------------------------
 with tab1:
     conn = sqlite3.connect(DB_NAME)
@@ -591,7 +587,7 @@ with tab1:
         st.info(f"No citizens found for year {selected_year}. Use 'Add Citizen' tab.")
 
 # ----------------------------------------------------------------------
-# Add / Edit Citizen (with sensitive fields as password inputs when toggle is off)
+# Add / Edit Citizen
 # ----------------------------------------------------------------------
 with tab2:
     edit_mode = "edit_id" in st.session_state
@@ -729,7 +725,7 @@ with tab2:
             st.rerun()
 
 # ----------------------------------------------------------------------
-# Search tab (mask sensitive fields in results)
+# Search tab
 # ----------------------------------------------------------------------
 with tab3:
     search_term = st.text_input("Search by name, matricule, or document ID")
