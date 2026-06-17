@@ -56,7 +56,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------
-# Multi-language dictionary (all labels translated)
+# Multi-language dictionary
 # ----------------------------------------------------------------------
 lang_dict = {
     "en": {
@@ -330,14 +330,14 @@ lang_dict = {
 }
 
 # ----------------------------------------------------------------------
-# Voice generation function (only for en, fr, es)
+# Voice generation function (preserves accents)
 # ----------------------------------------------------------------------
 def generate_audio(text, lang):
     if lang not in ["en", "fr", "es"]:
         return None
     lang_map = {"en": "en", "fr": "fr", "es": "es"}
-    import re
-    clean_text = re.sub(r'[^\x00-\x7F]+', '', text)[:1500]
+    # Do NOT strip accents or non‑ASCII – gTTS handles them perfectly
+    clean_text = text[:1500]   # only limit length
     if not clean_text.strip():
         return None
     with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
@@ -356,7 +356,7 @@ def generate_audio(text, lang):
             os.unlink(tmp_path)
 
 # ----------------------------------------------------------------------
-# Database setup (SQLite) – unchanged
+# Database setup (SQLite)
 # ----------------------------------------------------------------------
 DB_NAME = "haiti_archives.db"
 
