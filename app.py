@@ -56,10 +56,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------
-# Multi-language dictionary (English, French, Spanish only)
+# Multi-language dictionary (English, French, Spanish, Haitian Creole)
 # ----------------------------------------------------------------------
 lang_dict = {
     "en": {
+        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
         "login": "🔐 Login",
         "password": "Enter annual password",
         "wrong_password": "Incorrect password. Access denied.",
@@ -122,10 +123,11 @@ lang_dict = {
         "hide_sensitive": "🔒 Hide sensitive data in lists",
         "show_form_sensitive": "👁️ Show sensitive fields in form (reveal values)",
         "hide_form_sensitive": "🔒 Hide sensitive fields in form (show as dots)",
-        "explain_btn": "🎙️ AI Voice Explanation (Female)",
+        "explain_btn": "🎙️ AI Voice Explanation",
         "explain_text": "This is the Haitian Citizenship Data Base software. It allows you to manage citizen records including NIF, CIN, passport, driver's license, voting history, sponsorships, and upload documents. You can archive by year, validate with minister signature, and search records securely. Built by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py."
     },
     "fr": {
+        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
         "login": "🔐 Connexion",
         "password": "Entrez le mot de passe annuel",
         "wrong_password": "Mot de passe incorrect. Accès refusé.",
@@ -188,10 +190,11 @@ lang_dict = {
         "hide_sensitive": "🔒 Masquer les données sensibles dans les listes",
         "show_form_sensitive": "👁️ Afficher les champs sensibles dans le formulaire (révéler les valeurs)",
         "hide_form_sensitive": "🔒 Masquer les champs sensibles dans le formulaire (afficher des points)",
-        "explain_btn": "🎙️ Explication vocale IA (femme)",
+        "explain_btn": "🎙️ Explication vocale IA",
         "explain_text": "Ceci est le logiciel Base de données de la citoyenneté haïtienne. Il vous permet de gérer les dossiers des citoyens, y compris le NIF, la CIN, le passeport, le permis de conduire, l'historique de vote, les parrainages, et de télécharger des documents. Vous pouvez archiver par année, valider avec la signature du ministre, et rechercher des enregistrements en toute sécurité. Construit par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py."
     },
     "es": {
+        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
         "login": "🔐 Iniciar sesión",
         "password": "Ingrese la contraseña anual",
         "wrong_password": "Contraseña incorrecta. Acceso denegado.",
@@ -254,8 +257,75 @@ lang_dict = {
         "hide_sensitive": "🔒 Ocultar datos sensibles en listas",
         "show_form_sensitive": "👁️ Mostrar campos sensibles en el formulario (revelar valores)",
         "hide_form_sensitive": "🔒 Ocultar campos sensibles en el formulario (mostrar puntos)",
-        "explain_btn": "🎙️ Explicación por voz IA (mujer)",
+        "explain_btn": "🎙️ Explicación por voz IA",
         "explain_text": "Este es el software Base de Datos de Ciudadanía Haitiana. Le permite gestionar registros de ciudadanos, incluyendo NIF, CIN, pasaporte, licencia de conducir, historial de votación, patrocinios, y subir documentos. Puede archivar por año, validar con firma de ministro, y buscar registros de forma segura. Construido por Gesner Deslandes, ingeniero jefe de GlobalInternet.py."
+    },
+    "ht": {
+        "title": "BAZ DONE SITWAYÈNTE AYISYEN",
+        "login": "🔐 Konekte",
+        "password": "Antre modpas anyèl la",
+        "wrong_password": "Modpas pa bon. Aksè refize.",
+        "logout": "Dekonekte",
+        "dashboard": "Tablo de bor",
+        "add_citizen": "Ajoute yon sitwayen",
+        "edit_citizen": "Modifye sitwayen",
+        "search": "Chèche",
+        "matricule": "Matrikil Fiskal (NIF)",
+        "full_name": "Non konplè",
+        "birth_date": "Dat nesans",
+        "birth_place": "Kote li fèt",
+        "gender": "Sèks",
+        "male": "Gason",
+        "female": "Fanm",
+        "cin": "Kat CIN",
+        "cin_number": "Nimewo CIN",
+        "cin_delivery": "Dat livrezon",
+        "cin_expiry": "Dat ekspirasyon",
+        "passport": "Paspò",
+        "passport_number": "Nimewo paspò",
+        "passport_delivery": "Dat livrezon",
+        "passport_expiry": "Dat ekspirasyon",
+        "drivers_license": "Pèmi kondwi",
+        "license_number": "Nimewo pèmi",
+        "license_delivery": "Dat livrezon",
+        "license_expiry": "Dat ekspirasyon",
+        "voting": "Istwa vòt (opsyonèl)",
+        "voting_years": "Ane li te vote (separe ak vigil)",
+        "sponsorships": "Patenarya",
+        "family_sponsorship": "ID patenarya fanmi",
+        "school_sponsorship": "ID patenarya lekòl",
+        "other_sponsorship": "Lòt ID patenarya",
+        "documents": "Chaje dokiman (PDF, JPG, PNG)",
+        "minister_signature": "Siyati Minis la (pou valide dosye sa a)",
+        "sign": "Siyen ak valide",
+        "signed_by": "Siyen pa Minis la le",
+        "not_signed": "Pokò valide",
+        "developer": "Devlopè Python: Gesner Deslandes",
+        "company": "GlobalInternet.py",
+        "email": "deslandes78@gmail.com",
+        "phone": "(509) 4738-5663",
+        "save": "Sere",
+        "update": "Mete ajou",
+        "delete": "Efase",
+        "confirm_delete": "Èske w sèten ou vle efase sitwayen sa a?",
+        "year": "Ane",
+        "select_year": "Chwazi ane a",
+        "new_year": "Nouvo achiv anyèl",
+        "change_password": "Chanje modpas anyèl la (pou ane kap vini an)",
+        "current_password": "Modpas aktyèl",
+        "new_password": "Nouvo modpas",
+        "confirm_password": "Konfime nouvo modpas",
+        "password_updated": "Modpas mete ajou avèk siksè pou ane kap vini an.",
+        "upload_success": "Dosye chaje avèk siksè.",
+        "citizen_saved": "Dosye sitwayen anrejistre.",
+        "citizen_updated": "Dosye sitwayen mete ajou.",
+        "citizen_deleted": "Dosye sitwayen efase.",
+        "show_sensitive": "👁️ Montre enfòmasyon sansib nan lis yo (CIN, NIF, Paspò)",
+        "hide_sensitive": "🔒 Kache enfòmasyon sansib nan lis yo",
+        "show_form_sensitive": "👁️ Montre jaden sansib nan fòmilè a (wè valè yo)",
+        "hide_form_sensitive": "🔒 Kache jaden sansib nan fòmilè a (montre pwen)",
+        "explain_btn": "🔇 Pa gen vwa pou lang sa a (lekti sèlman)",
+        "explain_text": "Sa a se lojisyèl Baz Done Sitwayènte Ayisyen. Li pèmèt ou jere dosye sitwayen yo, tankou NIF, CIN, paspò, pèmi kondwi, istwa vòt, patenarya, ak telechaje dokiman. Ou ka achiveman pa ane, valide ak siyati Minis la, ak chèche dosye an sekirite. Konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py."
     }
 }
 
@@ -263,7 +333,10 @@ lang_dict = {
 # Voice generation function
 # ----------------------------------------------------------------------
 def generate_audio(text, lang):
-    lang_map = {"en": "en", "fr": "fr", "es": "es"}  # gTTS language codes
+    # Only generate voice for English, French, Spanish
+    if lang not in ["en", "fr", "es"]:
+        return None
+    lang_map = {"en": "en", "fr": "fr", "es": "es"}
     import re
     clean_text = re.sub(r'[^\x00-\x7F]+', '', text)[:1500]
     if not clean_text.strip():
@@ -375,12 +448,12 @@ def mask_value(value, show):
 # ----------------------------------------------------------------------
 init_db()
 
-# Language selection (only English, French, Spanish)
-lang_options = ["en", "fr", "es"]
+# Language selection (English, French, Spanish, Haitian Creole)
+lang_options = ["en", "fr", "es", "ht"]
 lang = st.sidebar.selectbox(
     "Language",
     lang_options,
-    format_func=lambda x: {"en":"English","fr":"Français","es":"Español"}[x]
+    format_func=lambda x: {"en":"English","fr":"Français","es":"Español","ht":"Kreyòl"}[x]
 )
 t = lang_dict[lang]
 
@@ -390,8 +463,7 @@ if "authenticated" not in st.session_state:
 
 if not st.session_state.authenticated:
     st.image("https://www.countryflags.com/wp-content/uploads/haiti-flag-png-large.png", width=150)
-    # Fixed Haitian Creole title
-    st.markdown("<h1 class='login-title'>BAZ DONE SITWAYÈNTE AYISYEN</h1>", unsafe_allow_html=True)
+    st.markdown(f"<h1 class='login-title'>{t['title']}</h1>", unsafe_allow_html=True)
     st.markdown(f"<p class='login-subtitle'>{t['login']}</p>", unsafe_allow_html=True)
     pwd = st.text_input(t["password"], type="password")
     if st.button(t["login"]):
@@ -404,22 +476,25 @@ if not st.session_state.authenticated:
 
 # Main app after login
 st.sidebar.image("https://www.countryflags.com/wp-content/uploads/haiti-flag-png-large.png", width=150)
-# Fixed Haitian Creole title in sidebar
-st.sidebar.title("BAZ DONE SITWAYÈNTE AYISYEN")
+st.sidebar.title(t["title"])
 st.sidebar.write(f"**{t['developer']}**")
 st.sidebar.write(f"🏢 {t['company']}")
 st.sidebar.write(f"📧 {t['email']}")
 st.sidebar.write(f"📞 {t['phone']}")
 
 # ----- AI Voice Explanation Button -----
-if st.sidebar.button(t["explain_btn"], use_container_width=True):
-    with st.spinner("Generating voice explanation..."):
-        audio_bytes = generate_audio(t["explain_text"], lang)
-        if audio_bytes:
-            st.sidebar.audio(audio_bytes, format="audio/mp3")
-            st.sidebar.success("Explanation played. Click again to repeat.")
-        else:
-            st.sidebar.error("Could not generate explanation audio.")
+# For Haitian Creole, show a message instead of voice
+if lang == "ht":
+    st.sidebar.info("🔇 Voice explanation is not available for Haitian Creole. Please use English, French, or Spanish for voice.")
+else:
+    if st.sidebar.button(t["explain_btn"], use_container_width=True):
+        with st.spinner("Generating voice explanation..."):
+            audio_bytes = generate_audio(t["explain_text"], lang)
+            if audio_bytes:
+                st.sidebar.audio(audio_bytes, format="audio/mp3")
+                st.sidebar.success("Explanation played. Click again to repeat.")
+            else:
+                st.sidebar.error("Could not generate explanation audio.")
 
 st.sidebar.markdown("---")
 
@@ -471,7 +546,7 @@ with st.sidebar.expander(t["change_password"]):
             st.error("Current password incorrect.")
 
 # Main content
-st.markdown("<h1 style='text-align: center; color: #00209F;'>BAZ DONE SITWAYÈNTE AYISYEN</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align: center; color: #00209F;'>{t['title']}</h1>", unsafe_allow_html=True)
 st.markdown(f"<h3 style='text-align: center;'>🇭🇹 {t['year']}: {selected_year} 🇭🇹</h3>", unsafe_allow_html=True)
 
 tab1, tab2, tab3 = st.tabs([t["dashboard"], t["add_citizen"], t["search"]])
