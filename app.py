@@ -124,7 +124,32 @@ lang_dict = {
         "show_form_sensitive": "👁️ Show sensitive fields in form (reveal values)",
         "hide_form_sensitive": "🔒 Hide sensitive fields in form (show as dots)",
         "explain_btn": "🎙️ AI Voice Explanation",
-        "explain_text": "This is the Haitian Citizenship Data Base software. It allows you to manage citizen records including NIF, CIN, passport, driver's license, voting history, sponsorships, and upload documents. You can archive by year, validate with minister signature, and search records securely. Built by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py."
+        # Updated detailed explanation
+        "explain_text": """This is the Haitian Citizenship Data Base software. It allows you to manage citizen records with the following features:
+
+- Personal information: full name, date of birth, place of birth, gender, and NIF (tax identification number).
+- Parents: mother's full name and father's full name are recorded.
+- Witness: for verification of parentage, a witness name is required along with the witness's document type (CIN, Passport, or Driver's License) and document number.
+- Official documents: CIN card details (number, delivery date, expiry), Passport details (number, delivery, expiry), Driver's License details (number, delivery, expiry).
+- Voting history: years the citizen voted, entered as comma-separated years.
+- Sponsorships: family, school, and other sponsorship IDs can be stored.
+- Document upload: you can attach PDF, JPG, or PNG files to each citizen record.
+- Minister validation: a minister can sign and validate the file, storing the signature date and minister's name.
+- Yearly archiving: data is organized by year, and you can switch between years.
+- Secure access: an annual password is required to log in, and it can be changed.
+- Sensitive data masking: you can choose to show or hide sensitive numbers in lists and forms.
+- AI voice explanation: this button provides an audio description of the system's features.
+
+The software was developed by Gesner Deslandes, Engineer‑in‑Chief at GlobalInternet.py.""",
+        # New keys for parents and witness
+        "mother": "Mother's Full Name",
+        "father": "Father's Full Name",
+        "witness": "Witness Name",
+        "witness_document_type": "Witness Document Type",
+        "witness_document_number": "Witness Document Number",
+        "document_type_cin": "CIN",
+        "document_type_passport": "Passport",
+        "document_type_license": "Driver's License",
     },
     "fr": {
         "title": "BASE DE DONNÉES DE LA CITOYENNETÉ HAÏTIENNE",
@@ -191,7 +216,30 @@ lang_dict = {
         "show_form_sensitive": "👁️ Afficher les champs sensibles dans le formulaire (révéler les valeurs)",
         "hide_form_sensitive": "🔒 Masquer les champs sensibles dans le formulaire (afficher des points)",
         "explain_btn": "🎙️ Explication vocale IA",
-        "explain_text": "Ceci est le logiciel Base de données de la citoyenneté haïtienne. Il vous permet de gérer les dossiers des citoyens, y compris le NIF, la CIN, le passeport, le permis de conduire, l'historique de vote, les parrainages, et de télécharger des documents. Vous pouvez archiver par année, valider avec la signature du ministre, et rechercher des enregistrements en toute sécurité. Construit par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py."
+        "explain_text": """Ceci est le logiciel Base de données de la citoyenneté haïtienne. Il vous permet de gérer les dossiers des citoyens avec les fonctionnalités suivantes :
+
+- Informations personnelles : nom complet, date de naissance, lieu de naissance, sexe et NIF (numéro d'identification fiscale).
+- Parents : le nom complet de la mère et le nom complet du père sont enregistrés.
+- Témoin : pour vérifier la filiation, un nom de témoin est requis ainsi que le type de document du témoin (CIN, Passeport ou Permis de conduire) et le numéro de document.
+- Documents officiels : détails de la carte CIN (numéro, date de délivrance, expiration), du Passeport (numéro, délivrance, expiration), du Permis de conduire (numéro, délivrance, expiration).
+- Historique de vote : années où le citoyen a voté, saisies sous forme d'années séparées par des virgules.
+- Parrainages : identifiants de parrainage familial, scolaire et autre peuvent être stockés.
+- Téléchargement de documents : vous pouvez joindre des fichiers PDF, JPG ou PNG à chaque dossier citoyen.
+- Validation ministérielle : un ministre peut signer et valider le dossier, enregistrant la date de signature et le nom du ministre.
+- Archivage annuel : les données sont organisées par année et vous pouvez basculer entre les années.
+- Accès sécurisé : un mot de passe annuel est requis pour se connecter et peut être changé.
+- Masquage des données sensibles : vous pouvez choisir d'afficher ou de masquer les numéros sensibles dans les listes et les formulaires.
+- Explication vocale IA : ce bouton fournit une description audio des fonctionnalités du système.
+
+Le logiciel a été développé par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py.""",
+        "mother": "Nom complet de la mère",
+        "father": "Nom complet du père",
+        "witness": "Nom du témoin",
+        "witness_document_type": "Type de document du témoin",
+        "witness_document_number": "Numéro de document du témoin",
+        "document_type_cin": "CIN",
+        "document_type_passport": "Passeport",
+        "document_type_license": "Permis de conduire",
     },
     "es": {
         "title": "BASE DE DATOS DE CIUDADANÍA HAITIANA",
@@ -258,7 +306,30 @@ lang_dict = {
         "show_form_sensitive": "👁️ Mostrar campos sensibles en el formulario (revelar valores)",
         "hide_form_sensitive": "🔒 Ocultar campos sensibles en el formulario (mostrar puntos)",
         "explain_btn": "🎙️ Explicación por voz IA",
-        "explain_text": "Este es el software Base de Datos de Ciudadanía Haitiana. Le permite gestionar registros de ciudadanos, incluyendo NIF, CIN, pasaporte, licencia de conducir, historial de votación, patrocinios, y subir documentos. Puede archivar por año, validar con firma de ministro, y buscar registros de forma segura. Construido por Gesner Deslandes, ingeniero jefe de GlobalInternet.py."
+        "explain_text": """Este es el software Base de Datos de Ciudadanía Haitiana. Le permite gestionar registros de ciudadanos con las siguientes características:
+
+- Información personal: nombre completo, fecha de nacimiento, lugar de nacimiento, género y NIF (número de identificación fiscal).
+- Padres: se registran el nombre completo de la madre y el nombre completo del padre.
+- Testigo: para verificar la filiación, se requiere el nombre de un testigo, así como el tipo de documento del testigo (CIN, Pasaporte o Licencia de conducir) y el número de documento.
+- Documentos oficiales: detalles de la cédula CIN (número, fecha de entrega, vencimiento), Pasaporte (número, entrega, vencimiento), Licencia de conducir (número, entrega, vencimiento).
+- Historial de votación: años en que el ciudadano votó, ingresados como años separados por comas.
+- Patrocinios: se pueden almacenar identificadores de patrocinio familiar, escolar y otro.
+- Carga de documentos: puede adjuntar archivos PDF, JPG o PNG a cada registro de ciudadano.
+- Validación ministerial: un ministro puede firmar y validar el expediente, registrando la fecha de firma y el nombre del ministro.
+- Archivo anual: los datos se organizan por año y puede cambiar entre años.
+- Acceso seguro: se requiere una contraseña anual para iniciar sesión y se puede cambiar.
+- Enmascaramiento de datos sensibles: puede elegir mostrar u ocultar números sensibles en listas y formularios.
+- Explicación por voz IA: este botón proporciona una descripción de audio de las características del sistema.
+
+El software fue desarrollado por Gesner Deslandes, ingeniero jefe de GlobalInternet.py.""",
+        "mother": "Nombre completo de la madre",
+        "father": "Nombre completo del padre",
+        "witness": "Nombre del testigo",
+        "witness_document_type": "Tipo de documento del testigo",
+        "witness_document_number": "Número de documento del testigo",
+        "document_type_cin": "CIN",
+        "document_type_passport": "Pasaporte",
+        "document_type_license": "Licencia de conducir",
     },
     "ht": {
         "title": "BAZ DONE SITWAYÈNTE AYISYEN",
@@ -325,7 +396,30 @@ lang_dict = {
         "show_form_sensitive": "👁️ Montre jaden sansib nan fòmilè a (wè valè yo)",
         "hide_form_sensitive": "🔒 Kache jaden sansib nan fòmilè a (montre pwen)",
         "explain_btn": "🔇 Pa gen vwa pou lang sa a (lekti sèlman)",
-        "explain_text": "Sa a se lojisyèl Baz Done Sitwayènte Ayisyen. Li pèmèt ou jere dosye sitwayen yo, tankou NIF, CIN, paspò, pèmi kondwi, istwa vòt, patenarya, ak telechaje dokiman. Ou ka achiveman pa ane, valide ak siyati Minis la, ak chèche dosye an sekirite. Konstwi pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py."
+        "explain_text": """Sa a se lojisyèl Baz Done Sitwayènte Ayisyen. Li pèmèt ou jere dosye sitwayen yo ak karakteristik sa yo:
+
+- Enfòmasyon pèsonèl: non konplè, dat nesans, kote li fèt, sèks ak NIF (nimewo idantifikasyon fiskal).
+- Paran: non konplè manman an ak non konplè papa a anrejistre.
+- Temwen: pou verifye filiyasyon, yo egzije non yon temwen ansanm ak kalite dokiman temwen an (CIN, Paspò oswa Pèmi Kondwi) ak nimewo dokiman an.
+- Dokiman ofisyèl: detay kat CIN (nimewo, dat livrezon, ekspirasyon), Paspò (nimewo, livrezon, ekspirasyon), Pèmi Kondwi (nimewo, livrezon, ekspirasyon).
+- Istwa vòt: ane sitwayen an te vote, antre kòm ane separe ak vigil.
+- Patenarya: idantifyan patenarya fanmi, lekòl ak lòt ka estoke.
+- Chaje dokiman: ou ka tache dosye PDF, JPG oswa PNG ak chak dosye sitwayen.
+- Validasyon minisyèl: yon minis ka siyen ak valide dosye a, anrejistre dat siyati a ak non minis la.
+- Achivman anyèl: done yo òganize pa ane epi ou ka chanje ant ane.
+- Aksè sekirize: yon modpas anyèl obligatwa pou konekte epi li ka chanje.
+- Maskaj done sansib: ou ka chwazi montre oswa kache nimewo sansib nan lis ak fòmilè.
+- Eksplikasyon vwa IA: bouton sa a bay yon deskripsyon odyo sou karakteristik sistèm nan.
+
+Lojisyèl la devlope pa Gesner Deslandes, enjenyè an chèf nan GlobalInternet.py.""",
+        "mother": "Non konplè manman",
+        "father": "Non konplè papa",
+        "witness": "Non temwen",
+        "witness_document_type": "Kalite dokiman temwen",
+        "witness_document_number": "Nimewo dokiman temwen",
+        "document_type_cin": "CIN",
+        "document_type_passport": "Paspò",
+        "document_type_license": "Pèmi kondwi",
     }
 }
 
@@ -336,7 +430,6 @@ def generate_audio(text, lang):
     if lang not in ["en", "fr", "es"]:
         return None
     lang_map = {"en": "en", "fr": "fr", "es": "es"}
-    # Do NOT strip accents or non‑ASCII – gTTS handles them perfectly
     clean_text = text[:1500]   # only limit length
     if not clean_text.strip():
         return None
@@ -363,6 +456,7 @@ DB_NAME = "haiti_archives.db"
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
+    # Citizens table – add new columns if not exist
     c.execute('''CREATE TABLE IF NOT EXISTS citizens (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         year INTEGER NOT NULL,
@@ -388,6 +482,21 @@ def init_db():
         minister_signature_date TEXT,
         minister_name TEXT
     )''')
+    # Check and add new columns for parents and witness
+    c.execute("PRAGMA table_info(citizens)")
+    columns = [col[1] for col in c.fetchall()]
+    new_cols = {
+        "mother_name": "TEXT",
+        "father_name": "TEXT",
+        "witness_name": "TEXT",
+        "witness_document_type": "TEXT",
+        "witness_document_number": "TEXT"
+    }
+    for col, col_type in new_cols.items():
+        if col not in columns:
+            c.execute(f"ALTER TABLE citizens ADD COLUMN {col} {col_type}")
+
+    # citizen_files table
     c.execute('''CREATE TABLE IF NOT EXISTS citizen_files (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         citizen_id INTEGER,
@@ -396,6 +505,7 @@ def init_db():
         upload_date TEXT,
         FOREIGN KEY (citizen_id) REFERENCES citizens (id)
     )''')
+    # app_config table
     c.execute('''CREATE TABLE IF NOT EXISTS app_config (
         key TEXT PRIMARY KEY,
         value TEXT
@@ -553,7 +663,10 @@ tab1, tab2, tab3 = st.tabs([t["dashboard"], t["add_citizen"], t["search"]])
 with tab1:
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute("SELECT id, matricule, full_name, minister_signed, cin_number, passport_number FROM citizens WHERE year = ?", (selected_year,))
+    c.execute("""SELECT id, matricule, full_name, minister_signed, cin_number, passport_number,
+                        mother_name, father_name, witness_name, witness_document_type, witness_document_number,
+                        birth_date, birth_place
+                 FROM citizens WHERE year = ?""", (selected_year,))
     citizens = c.fetchall()
     conn.close()
     if citizens:
@@ -561,13 +674,26 @@ with tab1:
             matricule_display = mask_value(cit[1], st.session_state.show_sensitive)
             cin_display = mask_value(cit[4], st.session_state.show_sensitive)
             passport_display = mask_value(cit[5], st.session_state.show_sensitive)
-            
+            mother_display = cit[6] or "N/A"
+            father_display = cit[7] or "N/A"
+            witness_display = cit[8] or "N/A"
+            witness_doc_type = cit[9] or "N/A"
+            witness_doc_num = mask_value(cit[10], st.session_state.show_sensitive) if cit[10] else "N/A"
+            birth_date = cit[11] or "N/A"
+            birth_place = cit[12] or "N/A"
             with st.expander(f"{cit[2]} (NIF: {matricule_display})"):
                 col1, col2 = st.columns([3,1])
                 with col1:
+                    st.write(f"**{t['birth_date']}:** {birth_date}")
+                    st.write(f"**{t['birth_place']}:** {birth_place}")
+                    st.write(f"**{t['mother']}:** {mother_display}")
+                    st.write(f"**{t['father']}:** {father_display}")
+                    st.write(f"**{t['witness']}:** {witness_display}")
+                    st.write(f"**{t['witness_document_type']}:** {witness_doc_type}")
+                    st.write(f"**{t['witness_document_number']}:** {witness_doc_num}")
                     st.write(f"**CIN:** {cin_display}")
                     st.write(f"**Passport:** {passport_display}")
-                    st.write(f"**Minister signed:** {'Yes' if cit[3] else 'No'}")
+                    st.write(f"**{t['minister_signature']}:** {'Yes' if cit[3] else 'No'}")
                 with col2:
                     if st.button(t["edit_citizen"], key=f"edit_{cit[0]}"):
                         st.session_state.edit_id = cit[0]
@@ -627,6 +753,15 @@ with tab2:
             family_sponsorship = st.text_input(t["family_sponsorship"], value=cit_data[17] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"family_sponsorship{key_suffix}")
             school_sponsorship = st.text_input(t["school_sponsorship"], value=cit_data[18] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"school_sponsorship{key_suffix}")
             other_sponsorship = st.text_input(t["other_sponsorship"], value=cit_data[19] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"other_sponsorship{key_suffix}")
+            # New fields
+            mother_name = st.text_input(t["mother"], value=cit_data[22] or "", key=f"mother{key_suffix}")
+            father_name = st.text_input(t["father"], value=cit_data[23] or "", key=f"father{key_suffix}")
+            witness_name = st.text_input(t["witness"], value=cit_data[24] or "", key=f"witness{key_suffix}")
+            witness_doc_type = st.selectbox(t["witness_document_type"], 
+                                            [t["document_type_cin"], t["document_type_passport"], t["document_type_license"]],
+                                            index=[t["document_type_cin"], t["document_type_passport"], t["document_type_license"]].index(cit_data[25]) if cit_data[25] in [t["document_type_cin"], t["document_type_passport"], t["document_type_license"]] else 0,
+                                            key=f"witness_doc_type{key_suffix}")
+            witness_doc_number = st.text_input(t["witness_document_number"], value=cit_data[26] or "", type="password" if not st.session_state.show_form_sensitive else "default", key=f"witness_doc_number{key_suffix}")
             minister_signed = cit_data[20]
         else:
             matricule = st.text_input(t["matricule"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"matricule{key_suffix}")
@@ -647,6 +782,14 @@ with tab2:
             family_sponsorship = st.text_input(t["family_sponsorship"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"family_sponsorship{key_suffix}")
             school_sponsorship = st.text_input(t["school_sponsorship"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"school_sponsorship{key_suffix}")
             other_sponsorship = st.text_input(t["other_sponsorship"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"other_sponsorship{key_suffix}")
+            # New fields
+            mother_name = st.text_input(t["mother"], key=f"mother{key_suffix}")
+            father_name = st.text_input(t["father"], key=f"father{key_suffix}")
+            witness_name = st.text_input(t["witness"], key=f"witness{key_suffix}")
+            witness_doc_type = st.selectbox(t["witness_document_type"], 
+                                            [t["document_type_cin"], t["document_type_passport"], t["document_type_license"]],
+                                            key=f"witness_doc_type{key_suffix}")
+            witness_doc_number = st.text_input(t["witness_document_number"], type="password" if not st.session_state.show_form_sensitive else "default", key=f"witness_doc_number{key_suffix}")
             minister_signed = False
 
         uploaded_files = st.file_uploader(t["documents"], accept_multiple_files=True, type=["pdf","jpg","jpeg","png"], key=f"files{key_suffix}")
@@ -669,13 +812,16 @@ with tab2:
                     cin_number=?, cin_delivery=?, cin_expiry=?,
                     passport_number=?, passport_delivery=?, passport_expiry=?,
                     license_number=?, license_delivery=?, license_expiry=?,
-                    voting_years=?, family_sponsorship=?, school_sponsorship=?, other_sponsorship=?
+                    voting_years=?, family_sponsorship=?, school_sponsorship=?, other_sponsorship=?,
+                    mother_name=?, father_name=?, witness_name=?, witness_document_type=?, witness_document_number=?
                     WHERE id=?""",
                     (selected_year, matricule, full_name, str(birth_date), birth_place, gender,
                      cin_number, str(cin_delivery), str(cin_expiry),
                      passport_number, str(passport_delivery), str(passport_expiry),
                      license_number, str(license_delivery), str(license_expiry),
-                     voting_years, family_sponsorship, school_sponsorship, other_sponsorship, cit_id))
+                     voting_years, family_sponsorship, school_sponsorship, other_sponsorship,
+                     mother_name, father_name, witness_name, witness_doc_type, witness_doc_number,
+                     cit_id))
                 st.success(t["citizen_updated"])
             else:
                 c.execute("""INSERT INTO citizens (
@@ -683,13 +829,15 @@ with tab2:
                     cin_number, cin_delivery, cin_expiry,
                     passport_number, passport_delivery, passport_expiry,
                     license_number, license_delivery, license_expiry,
-                    voting_years, family_sponsorship, school_sponsorship, other_sponsorship
-                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    voting_years, family_sponsorship, school_sponsorship, other_sponsorship,
+                    mother_name, father_name, witness_name, witness_document_type, witness_document_number
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                 (selected_year, matricule, full_name, str(birth_date), birth_place, gender,
                  cin_number, str(cin_delivery), str(cin_expiry),
                  passport_number, str(passport_delivery), str(passport_expiry),
                  license_number, str(license_delivery), str(license_expiry),
-                 voting_years, family_sponsorship, school_sponsorship, other_sponsorship))
+                 voting_years, family_sponsorship, school_sponsorship, other_sponsorship,
+                 mother_name, father_name, witness_name, witness_doc_type, witness_doc_number))
                 cit_id = c.lastrowid
                 st.success(t["citizen_saved"])
             conn.commit()
@@ -732,16 +880,28 @@ with tab3:
     if search_term:
         conn = sqlite3.connect(DB_NAME)
         c = conn.cursor()
-        c.execute("SELECT * FROM citizens WHERE year=? AND (full_name LIKE ? OR matricule LIKE ?)", (selected_year, f"%{search_term}%", f"%{search_term}%"))
+        c.execute("""SELECT id, matricule, full_name, birth_date, birth_place, mother_name, father_name,
+                            witness_name, witness_document_type, witness_document_number,
+                            cin_number, passport_number, minister_signed
+                     FROM citizens WHERE year=? AND (full_name LIKE ? OR matricule LIKE ?)""",
+                  (selected_year, f"%{search_term}%", f"%{search_term}%"))
         results = c.fetchall()
         if results:
             for r in results:
-                matricule_display = mask_value(r[2], st.session_state.show_sensitive)
-                cin_display = mask_value(r[7], st.session_state.show_sensitive)
-                passport_display = mask_value(r[10], st.session_state.show_sensitive)
-                st.write(f"**{r[3]}** - NIF: {matricule_display}")
+                matricule_display = mask_value(r[1], st.session_state.show_sensitive)
+                cin_display = mask_value(r[10], st.session_state.show_sensitive)
+                passport_display = mask_value(r[11], st.session_state.show_sensitive)
+                witness_doc_num = mask_value(r[9], st.session_state.show_sensitive) if r[9] else "N/A"
+                st.write(f"**{r[2]}** - NIF: {matricule_display}")
+                st.write(f"**{t['birth_date']}:** {r[3] or 'N/A'}")
+                st.write(f"**{t['birth_place']}:** {r[4] or 'N/A'}")
+                st.write(f"**{t['mother']}:** {r[5] or 'N/A'}")
+                st.write(f"**{t['father']}:** {r[6] or 'N/A'}")
+                st.write(f"**{t['witness']}:** {r[7] or 'N/A'}")
+                st.write(f"**{t['witness_document_type']}:** {r[8] or 'N/A'}")
+                st.write(f"**{t['witness_document_number']}:** {witness_doc_num}")
                 st.write(f"CIN: {cin_display} | Passport: {passport_display}")
-                st.write(f"Signed: {'Yes' if r[20] else 'No'}")
+                st.write(f"Signed: {'Yes' if r[12] else 'No'}")
                 c2 = conn.cursor()
                 c2.execute("SELECT file_name, upload_date FROM citizen_files WHERE citizen_id=?", (r[0],))
                 files = c2.fetchall()
